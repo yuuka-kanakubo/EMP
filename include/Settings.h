@@ -1,5 +1,5 @@
-#ifndef SETTINGS
-#define SETTINGS
+#ifndef SETTINGS_H
+#define SETTINGS_H
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>

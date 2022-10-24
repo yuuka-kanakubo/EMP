@@ -1,5 +1,5 @@
-#ifndef CONTAINER
-#define CONTAINER
+#ifndef CONTAINER_H
+#define CONTAINER_H
 #include "Constants.h"
 
 using std::string;

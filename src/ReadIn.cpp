@@ -14,11 +14,20 @@ ReadIn::ReadIn(shared_ptr<Message> ms_in, Settings::Options options_in):ms(ms_in
   std::cout << "ReadIn" << std::endl;
 }
 
-bool ReadIn::read(std::vector<Container::ParticleInfo> &part_1ev){
+bool ReadIn::read(const int i, std::vector<Container::ParticleInfo> &part_1ev){
+
+//File name
+//===========
+	std::stringstream ss;
+	ss << options.get_dir_name() << "/" << options.get_f_name() << setw(9) << setfill('0') << i << "/" << options.get_ext_name();
+	std::string inputpath = ss.str();
+
+
+
 
 			std::ifstream in;
-			in.open(options.get_f_name().c_str(),std::ios::in);
-			if(!in){ ms->open(options.get_f_name().c_str()); return false;}
+			in.open(inputpath.c_str(),std::ios::in);
+			if(!in){ ms->open(inputpath); return false;}
 
 
 			{
@@ -35,10 +44,11 @@ bool ReadIn::read(std::vector<Container::ParticleInfo> &part_1ev){
 						//weight=weight_in;
 					}else{
 						std::istringstream is(templine);
-						int data1, data2, ID, col, acol;
+						int data1, data2,data3,data4, ID, col, acol;
 						double m,e,px,py,pz,x,y,z,t,ft, rap;
 						std::string TAG;
-						is >> data1 >> data2 >> col >> acol >> ID >> m >> e >> px >> py >> pz >> rap >> x >> y >> z >> t >> ft >> TAG;
+						is >> data1 >> data2 >> data3 >> data4 >> col >> acol >> ID >> m >> e >> px >> py >> pz >> rap >> x >> y >> z >> t;
+						//is >> data1 >> data2 >> col >> acol >> ID >> m >> e >> px >> py >> pz >> rap >> x >> y >> z >> t >> ft >> TAG;
 
 
 						double P_squared=px*px+py*py+pz*pz;
@@ -62,24 +72,31 @@ bool ReadIn::read(std::vector<Container::ParticleInfo> &part_1ev){
 
 
 
-						if(constants::MODE.find("dndeta_proton")!=string::npos){
-							if(ID==constants::id_proton) { 
-
-								Container::ParticleInfo part_in;
-								part_in.eta=eta;
-								part_1ev.push_back(part_in);
-
-							}
-						}
-
-
-
-						}
-					}//getline
-					in.close();
-				}
+						//if(isParton?) { 
+						//if(fabs(eta)<0.5){
+							Container::ParticleInfo part_in;
+							part_in.eta=eta;
+							part_in.phi=phi;
+							part_in.mt=mt;
+							part_in.id=ID;
+							part_in.e=e;
+							part_in.px=px;
+							part_in.py=py;
+							part_in.pz=pz;
+							part_1ev.push_back(part_in);
+						//}
+				//}
 
 
-				return true;
+
+					}
+				}//getline
+				in.close();
+			}
+
+
+			return true;
 }
+
+
 

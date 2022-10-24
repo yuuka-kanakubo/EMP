@@ -17,7 +17,19 @@ public:
 ReadIn(shared_ptr<Message> ms_in, Settings::Options options_in);
 ~ReadIn(){};
 
-bool read(std::vector<Container::ParticleInfo> &part_1ev);
-  int test();
+bool read(const int i, std::vector<Container::ParticleInfo> &part_1ev);
+bool show_readin(std::vector<Container::ParticleInfo> part_1ev){
+
+for(const auto& elem: part_1ev)
+std::cout << elem.id << "  "
+	<< elem.e << "  "
+	<< elem.px << "  "
+	<< elem.py << "  "
+	<< elem.pz << "  "
+	<< std::endl;
+
+return true;
+};
+int test();
 };
 #endif

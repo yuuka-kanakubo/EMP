@@ -1,5 +1,5 @@
-#ifndef EMCONV
-#define EMCONV
+#ifndef EMCONV_H
+#define EMCONV_H
 #include <iostream>
 #include <memory>
 

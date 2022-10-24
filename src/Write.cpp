@@ -42,24 +42,24 @@ Write::~Write(){};
 
 				ct->max_nx+=constants::margin;
 
-				if(constants::MODE.find("cumulant_pt")!=string::npos || constants::MODE.find("cumulant_eta")!=string::npos || constants::MODE.find("cumulant_multi")!=string::npos) {
-
-					for(int i=0; i<ct->max_nx+1; ++i){
-
-						if(ct->HistHit[i]==0) continue;
-
-						double x_axis =ct->Hist_x[i];
-						ofs << setw(16) << fixed << setprecision(8) << x_axis << "  "
-							<< setw(16) << ct->FinalHist[i] << "  "
-							<< setw(16) << ct->HistErr[i] << "  "
-							<< setw(16) << ct->FinalHist_vn[i] << "  "
-							<< setw(16) << ct->HistErr_vn[i] << "  "
-							<< setw(16) << ct->HistHit[i] << endl;
-					}
-
-				}else if(constants::MODE.find("twopc2D")!=string::npos) {
-
-					if(!options.get_flag_SB_CMS()){
+//				if(constants::MODE.find("cumulant_pt")!=string::npos || constants::MODE.find("cumulant_eta")!=string::npos || constants::MODE.find("cumulant_multi")!=string::npos) {
+//
+//					for(int i=0; i<ct->max_nx+1; ++i){
+//
+//						if(ct->HistHit[i]==0) continue;
+//
+//						double x_axis =ct->Hist_x[i];
+//						ofs << setw(16) << fixed << setprecision(8) << x_axis << "  "
+//							<< setw(16) << ct->FinalHist[i] << "  "
+//							<< setw(16) << ct->HistErr[i] << "  "
+//							<< setw(16) << ct->FinalHist_vn[i] << "  "
+//							<< setw(16) << ct->HistErr_vn[i] << "  "
+//							<< setw(16) << ct->HistHit[i] << endl;
+//					}
+//
+//				}else if(constants::MODE.find("twopc2D")!=string::npos) {
+//
+//					if(!options.get_flag_SB_CMS()){
 						for(int i=0; i<this->getMapEdgeX(this->infohist->x_max); ++i){
 							for(int j=0; j<this->getMapEdgeY(this->infohist->y_max); ++j){
 
@@ -69,44 +69,43 @@ Write::~Write(){};
 								//ct->Hist2D_y[i][j];
 								ofs << setw(16) << fixed << setprecision(8) << xaxis << "  "
 									<< setw(16) << yaxis << "  "
-									<< setw(16) << ct->Final2DHist[i][j] << "  "
-									<< setw(16) << ct->Hist2DPartHit[i][j] << endl;
+									<< setw(16) << ct->Hist2D[i][j] << endl;
 							}
 							ofs << endl;
 						}
-					}else{
-						for(int i=0; i<this->getMapEdgeX(this->infohist->x_max); ++i){
-							for(int j=0; j<this->getMapEdgeY(this->infohist->y_max); ++j){
-
-								double xaxis=((constants::x_min+(this->infohist->d_x*i))+(constants::x_min+(this->infohist->d_x*(i+1))))/2.0;
-								double yaxis=((constants::y_min+(this->infohist->d_y*j))+(constants::y_min+(this->infohist->d_y*(j+1))))/2.0;
-								//ct->Hist2D_x[i][j];
-								//ct->Hist2D_y[i][j];
-								ofs << setw(16) << fixed << setprecision(8) << xaxis << "  "
-									<< setw(16) << yaxis << "  "
-									<< setw(16) << ct->Final2DHist[i][j] << "  "
-									<< setw(16) << ct->Hist2D[i][j] << "  "
-									<< setw(16) << ct->HistSub2D[i][j] << "  "
-									<< setw(16) << ct->Hist2DPartHit[i][j] << endl;
-							}
-							ofs << endl;
-						}
-					}
-
-				}else{
-					for(int i=0; i<this->getMapEdgeX(this->infohist->x_max); ++i){
-
-						if(ct->HistHit[i]==0) continue;
-						double x_axis =ct->Hist_x[i];
-						ofs << setw(16) << fixed << setprecision(8) << x_axis << "  "
-							<< setw(16) << ct->FinalHist[i] << "  "
-							<< setw(16) << ct->HistErr[i] << "  "
-							<< setw(16) << ct->HistHit[i] << endl;
-					}
-				}
-				if(constants::MODE.find("Rt_spectra")!=string::npos){
-					ofs << "%Mean Nt:" << ct->meanNt << endl;
-				}
+//					}else{
+//						for(int i=0; i<this->getMapEdgeX(this->infohist->x_max); ++i){
+//							for(int j=0; j<this->getMapEdgeY(this->infohist->y_max); ++j){
+//
+//								double xaxis=((constants::x_min+(this->infohist->d_x*i))+(constants::x_min+(this->infohist->d_x*(i+1))))/2.0;
+//								double yaxis=((constants::y_min+(this->infohist->d_y*j))+(constants::y_min+(this->infohist->d_y*(j+1))))/2.0;
+//								//ct->Hist2D_x[i][j];
+//								//ct->Hist2D_y[i][j];
+//								ofs << setw(16) << fixed << setprecision(8) << xaxis << "  "
+//									<< setw(16) << yaxis << "  "
+//									<< setw(16) << ct->Final2DHist[i][j] << "  "
+//									<< setw(16) << ct->Hist2D[i][j] << "  "
+//									<< setw(16) << ct->HistSub2D[i][j] << "  "
+//									<< setw(16) << ct->Hist2DPartHit[i][j] << endl;
+//							}
+//							ofs << endl;
+//						}
+//					}
+//
+//				}else{
+//					for(int i=0; i<this->getMapEdgeX(this->infohist->x_max); ++i){
+//
+//						if(ct->HistHit[i]==0) continue;
+//						double x_axis =ct->Hist_x[i];
+//						ofs << setw(16) << fixed << setprecision(8) << x_axis << "  "
+//							<< setw(16) << ct->FinalHist[i] << "  "
+//							<< setw(16) << ct->HistErr[i] << "  "
+//							<< setw(16) << ct->HistHit[i] << endl;
+//					}
+//				}
+//				if(constants::MODE.find("Rt_spectra")!=string::npos){
+//					ofs << "%Mean Nt:" << ct->meanNt << endl;
+//				}
 				ofs << endl;
 				return true;
 			}

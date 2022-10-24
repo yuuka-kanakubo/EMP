@@ -59,14 +59,13 @@ bool EMconv::Convert(){
 				}//End of particle loop
 				//==========================
 				
-				//Normalization if needed 
-				//====================
-				//for(int nx = 0; nx<max_nx+1; nx++){
-				//	for(int ny = 0; ny<max_ny+1; ny++){
-				//		ct->Hist2D[nx][ny]+=Hit1ev[nx][ny]*EVENT.weight()/((double)NumTrig);
+				for(int nx = 0; nx<max_nx+1; nx++){
+					for(int ny = 0; ny<max_ny+1; ny++){
+
+						ct->Hist2D[nx][ny]+=Hit1ev[nx][ny];
 				//		ct->Hist2DPartHit[nx][ny]+=Hit1ev[nx][ny]*EVENT.weight();
-				//	}
-				//}
+					}
+				}
 
 				//ct->SumWeight+=EVENT.weight();
 

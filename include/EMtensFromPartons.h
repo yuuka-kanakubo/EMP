@@ -7,6 +7,7 @@
 #include "Message.h"
 #include "Settings.h"
 #include "LogSettings.h"
+#include "InfoHist.h"
 
 class EMtensFromPartons{
 
@@ -15,6 +16,7 @@ Settings::Options& options;
 LogSettings& log;
 std::shared_ptr<Message> ms;
 int PrintCounter;
+
 
 public:
 

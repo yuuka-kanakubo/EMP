@@ -9,12 +9,10 @@ EMtensFromPartons::EMtensFromPartons(Settings::Options options_in, LogSettings l
 	//=================================
 	auto readin = std::make_shared<ReadIn>(this->ms, this->options);
 
-
 	//Setting for printout
-	//===================
+	//======================
 	if(constants::MODE.find("timelapse")!=std::string::npos) this->PrintCounter=constants::PrintCounterTL;
 	else this->PrintCounter=constants::PrintCounter;
-
 
 	//EVENT LOOP
 	//===========
@@ -23,9 +21,13 @@ EMtensFromPartons::EMtensFromPartons(Settings::Options options_in, LogSettings l
 		std::vector<Container::ParticleInfo> part_1ev;
 		readin->read(i, part_1ev);
 		readin->show_readin(part_1ev);
+
+		//Converting energy and momentum into EMtensor
+		//==============================================
+		auto emconv = std::make_shared<EMconv>(part_1ev);
+
 	}
 
-	auto emconv = std::make_shared<EMconv>();
 
 	auto writeout = std::make_shared<WriteOut>();
 

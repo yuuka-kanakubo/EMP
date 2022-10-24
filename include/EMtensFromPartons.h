@@ -2,7 +2,7 @@
 #define EMtensFromPartons_H
 
 #include "ReadIn.h"
-#include "WriteOut.h"
+#include "Write.h"
 #include "EMconv.h"
 #include "Message.h"
 #include "Settings.h"
@@ -16,6 +16,7 @@ Settings::Options& options;
 LogSettings& log;
 std::shared_ptr<Message> ms;
 int PrintCounter;
+std::shared_ptr<Rndom> rndom;
 
 
 public:

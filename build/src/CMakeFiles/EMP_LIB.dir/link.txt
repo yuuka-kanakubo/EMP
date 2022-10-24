@@ -1,0 +1,2 @@
+/usr/bin/ar qc libEMP_LIB.a  CMakeFiles/EMP_LIB.dir/ReadIn.cpp.o CMakeFiles/EMP_LIB.dir/Write.cpp.o CMakeFiles/EMP_LIB.dir/EMconv.cpp.o CMakeFiles/EMP_LIB.dir/EMtensFromPartons.cpp.o
+/usr/bin/ranlib libEMP_LIB.a

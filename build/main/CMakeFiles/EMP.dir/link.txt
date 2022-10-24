@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++17 -Ofast -Wall  -rdynamic CMakeFiles/EMP.dir/main.cpp.o  -o ../../EMP  ../src/libEMP_LIB.a 

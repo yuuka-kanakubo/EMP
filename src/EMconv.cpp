@@ -1,92 +1,72 @@
 #include "EMconv.h"
 
-EMconv::EMconv(std::vector<Container::ParticleInfo> part_1ev_in, std::shared_ptr<Container>& ct_in):part_1ev(part_1ev_in), ct(ct_in){
-
-infohist = std::make_shared<InfoHist>(constants::x_max, constants::y_max, constants::d_x, constants::d_y, 2.0);
-this->Convert();
-
+EMconv::EMconv(std::vector<Container::ParticleInfo> part_1ev_in, std::shared_ptr<Container>& ct_in):part_1ev(part_1ev_in), ct(ct_in), tau(0.30), detas(0.5){//Here, tau is in fm
+	infohist = std::make_shared<InfoHist>(constants::x_max, constants::y_max, constants::d_x, constants::d_y, 2.0);
+	xy6sigma=round(constants::transSmear*6.0/constants::dl);
+	etas6sigma=round(constants::longSmear*6.0/this->detas);
+	this->Convert();
 };
+
 EMconv::~EMconv(){};
 
-bool EMconv::Convert(){
 
-		//Initialize arrays
-		//=============
-				double **Hit1ev;
-				Hit1ev = new double *[constants::x_cell_capa];
-				for(int i_cell=0; i_cell<constants::x_cell_capa; i_cell++){
-					Hit1ev[i_cell] = new double [constants::y_cell_capa];
-				}
-				for(int i=0; i<constants::x_cell_capa; i++){
-					for(int j=0; j<constants::y_cell_capa; j++){
-						Hit1ev[i][j]=0.0;
-					}
-				}
-				int max_nx = 0, max_ny = 0;
-				int NumPair=0;
-				int NumTrig=0;
+
+bool EMconv::Convert(){
 
 		//Particle loop
 		//=============
 	for(const auto& part: part_1ev){
 
-		std::cout << part.id << "  "
-			<< part.e << "  "
-			<< part.px << "  "
-			<< part.py << "  "
-			<< part.pz << "  "
-			<< std::endl;
+	//	std::cout << part.id << "  "
+	//		<< part.e << "  "
+	//		<< part.px << "  "
+	//		<< part.py << "  "
+	//		<< part.pz << "  "
+	//		<< std::endl;
 
-						double x_val=part.x;
-						if(x_val<constants::x_min || x_val>this->infohist->x_max) continue;
-						int nx=(int)((x_val/this->infohist->d_x)+(std::fabs(constants::x_min)/this->infohist->d_x));
 
-						double y_val=part.y;
-						if(y_val<constants::y_min || y_val>this->infohist->y_max) continue;
-						int ny=(int)((y_val/this->infohist->d_y)+(std::fabs(constants::y_min)/this->infohist->d_y));
+						//Get cell index of the position of each particle.
+						//=============================================
+						int xcenter_i=get_xcell(part.x);
+						int ycenter_i=get_ycell(part.y);
+						int etacenter_i=get_etacell(part.eta);
 
-						if(max_nx<nx) max_nx = nx;
-						if(max_ny<ny) max_ny = ny;
+						//Get nx and ny.
+						//Loop over the distribution.
+						//============================
+						double GAUSS=0.0;
+						int k = 0;
+						for(int k = this->get_etamin(etacenter_i); k < this->get_etamax(etacenter_i); k++ ){
+std::cout << "k " << k << "    in eta " << part.eta<< std::endl;
+							double etat = part.eta - this->get_etacoordinate(k);
+							double longFactor = (1.0/(sqrt(2*M_PI)*constants::longSmear*this->tau))*exp(-0.5*etat*etat/(constants::longSmear*constants::longSmear));
 
-						//Tmunu
-						//=====
-						Hit1ev[nx][ny]+=1.0;
+							//Get how much pmu should be deposited: Tmunu
+							//==========================================
+							for( int i = this->get_xmin(xcenter_i); i < this->get_xmax(xcenter_i); i++ ){
+								for( int j = this->get_ymin(ycenter_i); j < this->get_ymax(ycenter_i); j++ ){
+									double xt = this->get_xcoordinate(i) - part.x;
+									double yt = this->get_ycoordinate(j) - part.y; 
+									double transFactor = (1.0/(2*M_PI*constants::transSmear*constants::transSmear))*exp(-0.5*(xt*xt+yt*yt)/(constants::transSmear*constants::transSmear) );
+									double invV=1.0/(constants::dl*constants::dl*this->tau*this->detas);
+									if(k==84)
+										ct->Hist2D[i][j]+=invV*(part.e*part.e/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+									GAUSS+=transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+								}//y
+							}//x
+						}//eta
 
-						ct->Hist2D_x[nx][ny]+=x_val;
-						ct->Hist2D_y[nx][ny]+=y_val;
-						if(ct->max_nx<nx) ct->max_nx=nx;
-						if(ct->max_ny<ny) ct->max_ny=ny;
+	std::cout << "Gauss " << std::fixed << std::setprecision(8) << std::setw(16) << GAUSS << std::endl;
+
+
 
 				}//End of particle loop
 				//==========================
-				
-				for(int nx = 0; nx<max_nx+1; nx++){
-					for(int ny = 0; ny<max_ny+1; ny++){
-
-						ct->Hist2D[nx][ny]+=Hit1ev[nx][ny];
-				//		ct->Hist2DPartHit[nx][ny]+=Hit1ev[nx][ny]*EVENT.weight();
-					}
-				}
-
-				//ct->SumWeight+=EVENT.weight();
-
-
-				for(int i = 0; i < constants::x_cell_capa; i++) {
-					delete[] Hit1ev[i];
-				}
-				delete[] Hit1ev;
-
 return true;
 }
 
 
-//double f_parton(){
-//
-//
-//}
-
 
 int EMconv::test(){
-
 return 0;
 };

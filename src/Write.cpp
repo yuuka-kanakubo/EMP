@@ -20,7 +20,7 @@
 using namespace std;
 
 
-Write::Write(shared_ptr<Message> ms_in, Settings::Options options_in, shared_ptr<InfoHist> infohist_in, shared_ptr<Util_func> uf_in):ms(ms_in), options(options_in), infohist(infohist_in), uf(uf_in){};
+Write::Write(shared_ptr<Message> ms_in, Settings::Options options_in, shared_ptr<InfoHist> infohist_in, shared_ptr<Util_func> uf_in):ms(ms_in), options(options_in), infohist(infohist_in), uf(uf_in), detas(0.5){};
 Write::~Write(){};
 
 
@@ -60,11 +60,15 @@ Write::~Write(){};
 //				}else if(constants::MODE.find("twopc2D")!=string::npos) {
 //
 //					if(!options.get_flag_SB_CMS()){
-						for(int i=0; i<this->getMapEdgeX(this->infohist->x_max); ++i){
-							for(int j=0; j<this->getMapEdgeY(this->infohist->y_max); ++j){
+						for(int i=0; i<constants::x_cell_capa; ++i){
+							for(int j=0; j<constants::y_cell_capa; ++j){
 
 								double xaxis=((constants::x_min+(this->infohist->d_x*i))+(constants::x_min+(this->infohist->d_x*(i+1))))/2.0;
 								double yaxis=((constants::y_min+(this->infohist->d_y*j))+(constants::y_min+(this->infohist->d_y*(j+1))))/2.0;
+								if (constants::MODE.find("2dmap")!=string::npos) {
+									xaxis=this->get_xcoordinate(i);
+									yaxis=this->get_ycoordinate(j);
+								}
 								//ct->Hist2D_x[i][j];
 								//ct->Hist2D_y[i][j];
 								ofs << setw(16) << fixed << setprecision(8) << xaxis << "  "

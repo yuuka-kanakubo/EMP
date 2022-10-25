@@ -13,6 +13,22 @@ private:
 		Settings::Options options;
 		std::shared_ptr<InfoHist> infohist;
 		std::shared_ptr<Util_func> uf;
+double detas;
+
+		double get_xcoordinate(int i){
+			double x_coord = (i-(constants::x_cell_capa-1)/2)*constants::dl;//[fm]
+			return x_coord;
+		}
+
+		double get_ycoordinate(int j){
+			double y_coord = (j-(constants::y_cell_capa-1)/2)*constants::dl;//[fm]
+			return y_coord;
+		}
+
+		double get_etacoordinate(int k){
+			double eta_coord = (k-(constants::eta_cell_capa-1)/2)*this->detas;
+			return eta_coord;
+		}
 
 public:
 

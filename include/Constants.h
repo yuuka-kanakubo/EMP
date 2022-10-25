@@ -59,6 +59,8 @@ inline const double TL_dtau1FM=0.010;
 inline const double TL_dtau2=0.3/hbarc;
 inline const std::string ext_nameTLxy="hydro_profiles_eta_at0__tau_";
 inline const std::string ext_nameTLxeta="hydro_profiles_y_at0__tau_";
+inline const double transSmear = 0.50;//fm
+inline const double longSmear = 0.50;
 
 
 #ifdef DNDETA_PROTON
@@ -338,19 +340,23 @@ inline const std::string ext_nameTLxeta="hydro_profiles_y_at0__tau_";
 #elif defined TWODMAP
 	const std::string MODE = "2dmap";
 	const string default_out_directory_name="output";
-	const double x_max = 10.0;
-	const double x_min = -10.0;
-	const double x_max_HI = 1.0;
-	const double d_x = 0.5;
-	const double d_x_HI = 0.5;
-	const double y_max = 10.0;
-	const double y_min = -10.0;
-	const double y_max_HI = 1.0;
-	const double d_y = 0.5;
-	const double d_y_HI = 0.5;
-	const int x_cell_capa=1000;
-	const int y_cell_capa=1000;
+	const double x_max = 10.0;//Not used
+	const double x_min = -10.0;//Not used
+	const double x_max_HI = 1.0;//Not used
+	const double d_x = 0.5;//Not used 
+	const double d_x_HI = 0.5;//Not used 
+	const double y_max = 10.0;//Not used
+	const double y_min = -10.0;//Not used
+	const double y_max_HI = 1.0;//Not used
+	const double d_y = 0.5;//Not used 
+	const double d_y_HI = 0.5;//Not used 
+	const int x_cell_capa=121;
+	const int y_cell_capa=121;
+	const int eta_cell_capa=169;
 	const string default_ext="/hadronised.txt";
+const double dl = 0.3;
+const double dleta = 0.15;
+
 #else
 	const std::string MODE = "default";
 	const string default_out_directory_name="output";

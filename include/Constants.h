@@ -335,6 +335,22 @@ inline const std::string ext_nameTLxeta="hydro_profiles_y_at0__tau_";
 	const double d_x = 0.5;
 	const int x_cell_capa=1000;
 	const string default_ext="/hadronised.txt";
+#elif defined TWODMAP
+	const std::string MODE = "2dmap";
+	const string default_out_directory_name="output";
+	const double x_max = 10.0;
+	const double x_min = -10.0;
+	const double x_max_HI = 1.0;
+	const double d_x = 0.5;
+	const double d_x_HI = 0.5;
+	const double y_max = 10.0;
+	const double y_min = -10.0;
+	const double y_max_HI = 1.0;
+	const double d_y = 0.5;
+	const double d_y_HI = 0.5;
+	const int x_cell_capa=1000;
+	const int y_cell_capa=1000;
+	const string default_ext="/hadronised.txt";
 #else
 	const std::string MODE = "default";
 	const string default_out_directory_name="output";

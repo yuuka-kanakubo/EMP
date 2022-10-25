@@ -121,7 +121,7 @@ class Container{
 
        Container(bool SB_CMS):flag_SB_CMS(SB_CMS),SumWeight(0.0), SumPair(0.0), SumTrig(0.0), CountEv(0), B00(0.0), meanNt(-1.0){
 cout << "Calling Container." << endl;
-	       if(constants::MODE.find("twopc")!=string::npos){
+	       if(constants::MODE.find("twopc")!=string::npos || constants::MODE.find("2dmap")!=string::npos){
 		       Hist2D = new double *[constants::x_cell_capa];
 		       Hist2D_x= new double *[constants::x_cell_capa];
 		       Hist2D_y= new double *[constants::x_cell_capa];
@@ -202,7 +202,7 @@ cout << "Calling Container." << endl;
        ~Container(){
 	       cout << "Calling Deconstructore of Container." << endl;
 	       //Free each sub-array
-	       if(constants::MODE.find("twopc")!=string::npos){
+	       if(constants::MODE.find("twopc")!=string::npos || constants::MODE.find("2dmap")!=string::npos){
 		       for(int i = 0; i < constants::x_cell_capa; i++) {
 			       delete[] Hist2D[i];
 			       delete[] Hist2D_x[i];

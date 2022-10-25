@@ -83,6 +83,10 @@ bool ReadIn::read(const int i, std::vector<Container::ParticleInfo> &part_1ev){
 							part_in.px=px;
 							part_in.py=py;
 							part_in.pz=pz;
+							part_in.x=x;
+							part_in.y=y;
+							part_in.z=z;
+							part_in.t=t;
 							part_1ev.push_back(part_in);
 						//}
 				//}

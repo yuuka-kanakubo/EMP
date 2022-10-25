@@ -3,6 +3,7 @@
 EMconv::EMconv(std::vector<Container::ParticleInfo> part_1ev_in, std::shared_ptr<Container>& ct_in):part_1ev(part_1ev_in), ct(ct_in){
 
 infohist = std::make_shared<InfoHist>(constants::x_max, constants::y_max, constants::d_x, constants::d_y, 2.0);
+this->Convert();
 
 };
 EMconv::~EMconv(){};

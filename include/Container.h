@@ -7,6 +7,7 @@ using std::cout;
 using std::endl;
 using std::vector;
 
+
 class Container{
  
    private:
@@ -80,6 +81,37 @@ class Container{
 	};
 
 
+         class MultiComp{
+
+		 public:
+			 double tt; 
+			 double xx; 
+			 double yy; 
+			 double zz; 
+			 double tx; 
+			 double ty; 
+			 double tz; 
+			 double xy; 
+			 double xz; 
+			 double yz; 
+			 void init_zero(){
+
+                          tt=0.0;
+			  xx=0.0; 
+			  yy=0.0; 
+			  zz=0.0; 
+			  tx=0.0; 
+			  ty=0.0; 
+			  tz=0.0; 
+			  xy=0.0; 
+			  xz=0.0; 
+			  yz=0.0; 
+
+			 }
+
+	 };
+
+
 	//Info of 1 event.
 	//---------------
 	class EventInfo{
@@ -123,6 +155,7 @@ class Container{
 cout << "Calling Container." << endl;
 	       if(constants::MODE.find("twopc")!=string::npos || constants::MODE.find("2dmap")!=string::npos){
 		       Hist2D = new double *[constants::x_cell_capa];
+		       Hist2DMultiComp = new MultiComp *[constants::x_cell_capa];
 		       Hist2D_x= new double *[constants::x_cell_capa];
 		       Hist2D_y= new double *[constants::x_cell_capa];
 		       Hist2DPartHit= new double *[constants::x_cell_capa];
@@ -136,6 +169,7 @@ cout << "Calling Container." << endl;
 
 		       for(int i=0; i<constants::x_cell_capa; i++){
 			       Hist2D[i] = new double[constants::y_cell_capa];
+			       Hist2DMultiComp[i] = new MultiComp[constants::y_cell_capa];
 			       Hist2D_x[i]= new double[constants::y_cell_capa];
 			       Hist2D_y[i]= new double[constants::y_cell_capa];
 			       Hist2DPartHit[i]= new double[constants::y_cell_capa];
@@ -151,6 +185,7 @@ cout << "Calling Container." << endl;
 		       for(int i=0; i<constants::x_cell_capa; i++){
 			       for(int j=0; j<constants::y_cell_capa; j++){
 				       Hist2D[i][j]=0.0;
+				       Hist2DMultiComp[i][j].init_zero();
 				       Hist2D_x[i][j]=0.0;
 				       Hist2D_y[i][j]=0.0;
 				       Hist2DPartHit[i][j]=0.0;
@@ -205,6 +240,7 @@ cout << "Calling Container." << endl;
 	       if(constants::MODE.find("twopc")!=string::npos || constants::MODE.find("2dmap")!=string::npos){
 		       for(int i = 0; i < constants::x_cell_capa; i++) {
 			       delete[] Hist2D[i];
+			       delete[] Hist2DMultiComp[i];
 			       delete[] Hist2D_x[i];
 			       delete[] Hist2D_y[i];
 			       delete[] Hist2DPartHit[i];
@@ -218,6 +254,7 @@ cout << "Calling Container." << endl;
 		       }
 		       //Free the array of pointers
 		       delete[] Hist2D;
+		       delete[] Hist2DMultiComp;
 		       delete[] Hist2D_x;
 		       delete[] Hist2D_y;
 		       delete[] Hist2DPartHit;
@@ -373,6 +410,7 @@ cout << "Calling Container." << endl;
 	int max_ny=-1;
 
 	double **Hist2D;
+	MultiComp **Hist2DMultiComp;
 	double **Hist2D_x;
 	double **Hist2D_y;
 	double **Hist2DPartHit;

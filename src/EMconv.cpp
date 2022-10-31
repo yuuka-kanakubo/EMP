@@ -49,8 +49,14 @@ std::cout << "k " << k << "    in eta " << part.eta<< std::endl;
 									double yt = this->get_ycoordinate(j) - part.y; 
 									double transFactor = (1.0/(2*M_PI*constants::transSmear*constants::transSmear))*exp(-0.5*(xt*xt+yt*yt)/(constants::transSmear*constants::transSmear) );
 									double invV=1.0/(constants::dl*constants::dl*this->tau*this->detas);
-									if(k==84)
-										ct->Hist2D[i][j]+=invV*(part.e*part.e/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+									if(k==84){
+										ct->Hist2DMultiComp[i][j].tt+=invV*(part.e*part.e/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+										ct->Hist2DMultiComp[i][j].xx+=invV*(part.px*part.px/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+										ct->Hist2DMultiComp[i][j].yy+=invV*(part.py*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+										ct->Hist2DMultiComp[i][j].zz+=invV*(part.pz*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+										ct->Hist2DMultiComp[i][j].xy+=invV*(part.pz*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+										ct->Hist2DMultiComp[i][j].xz+=invV*(part.px*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+									}
 									GAUSS+=transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
 								}//y
 							}//x

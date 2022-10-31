@@ -354,7 +354,7 @@ inline const double longSmear = 0.50;
 	const int y_cell_capa=121;
 	const int eta_cell_capa=169;
 	const string default_ext="/hadronised.txt";
-const double dl = 0.3;
+const double dl = 0.3;//fm
 const double dleta = 0.15;
 
 #else

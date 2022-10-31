@@ -1,10 +1,11 @@
 #!/bin/sh
 
-DIR="../pythia8244/dynamical_fragmentation/data/20221018_initial_pp13TeV_MB_pT0Ref1.9_test"
+#DIR="../pythia8244/dynamical_fragmentation/data/20221026_initial_PBPB2.76TeV_MB_pT0Ref0.9_test"
+DIR="/home/yuuka/some_jets/npdf_proton_0"
 EV="ev"
 #EXT="hadronFinal_core_weakStop_wcol.txt"
-EXT="initial.txt"
-outputdir="test"
+EXT="jets_SAT_MC.txt"
+outputdir="PBPB_EKRT_test"
 n=1
 
 

@@ -47,7 +47,11 @@ bool ReadIn::read(const int i, std::vector<Container::ParticleInfo> &part_1ev){
 						int data1, data2,data3,data4, ID, col, acol;
 						double m,e,px,py,pz,x,y,z,t,ft, rap;
 						std::string TAG;
-						is >> data1 >> data2 >> data3 >> data4 >> col >> acol >> ID >> m >> e >> px >> py >> pz >> rap >> x >> y >> z >> t;
+						//is >> data1 >> data2 >> data3 >> data4 >> col >> acol >> ID >> m >> e >> px >> py >> pz >> rap >> x >> y >> z >> t;
+						is >> t >> x >> y >> z >> e >> px >> py >> pz ;
+//std::cout << __FILE__ << "  " << __LINE__ << std::endl;
+						ID=21;
+						//std::cout << e << "   " << px << std::endl;
 						//is >> data1 >> data2 >> col >> acol >> ID >> m >> e >> px >> py >> pz >> rap >> x >> y >> z >> t >> ft >> TAG;
 
 

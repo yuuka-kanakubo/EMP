@@ -60,6 +60,7 @@ Write::~Write(){};
 //				}else if(constants::MODE.find("twopc2D")!=string::npos) {
 //
 //					if(!options.get_flag_SB_CMS()){
+ofs << "# x, y, tt, xx, yy, zz, xy, xz" << std::endl;
 						for(int i=0; i<constants::x_cell_capa; ++i){
 							for(int j=0; j<constants::y_cell_capa; ++j){
 
@@ -73,7 +74,13 @@ Write::~Write(){};
 								//ct->Hist2D_y[i][j];
 								ofs << setw(16) << fixed << setprecision(8) << xaxis << "  "
 									<< setw(16) << yaxis << "  "
-									<< setw(16) << ct->Hist2D[i][j] << endl;
+									<< setw(16) << ct->Hist2DMultiComp[i][j].tt << "  " 
+									<< setw(16) << ct->Hist2DMultiComp[i][j].xx << "  " 
+									<< setw(16) << ct->Hist2DMultiComp[i][j].yy << "  " 
+									<< setw(16) << ct->Hist2DMultiComp[i][j].zz << "  " 
+									<< setw(16) << ct->Hist2DMultiComp[i][j].xy << "  " 
+									<< setw(16) << ct->Hist2DMultiComp[i][j].xz << "  " 
+									<< endl;
 							}
 							ofs << endl;
 						}

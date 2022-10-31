@@ -34,6 +34,7 @@ bool ReadIn::read(const int i, std::vector<Container::ParticleInfo> &part_1ev){
 				std::string templine;
 				while(getline(in,templine)) {
 					if(templine.find('#')!=std::string::npos) {
+					}else if(templine.find("JC")!=std::string::npos) {
 					} else if(templine.find('%')!=std::string::npos){
 						std::istringstream iss(templine);
 						std::string pct;
@@ -81,7 +82,7 @@ bool ReadIn::read(const int i, std::vector<Container::ParticleInfo> &part_1ev){
 
 
 
-						//if(isParton?) { 
+						if(isParton(ID)) { 
 						//if(fabs(eta)<0.5){
 							Container::ParticleInfo part_in;
 							part_in.eta=eta;
@@ -97,7 +98,7 @@ bool ReadIn::read(const int i, std::vector<Container::ParticleInfo> &part_1ev){
 							part_in.z=z;
 							part_in.t=t;
 							part_1ev.push_back(part_in);
-						//}
+						}
 				//}
 
 

@@ -1,10 +1,9 @@
 #ifndef CONTAINER_H
 #define CONTAINER_H
+#include <iostream> 
 #include "Constants.h"
 
 using std::string;
-using std::cout;
-using std::endl;
 using std::vector;
 
 
@@ -152,7 +151,7 @@ class Container{
 	public:
 
        Container(bool SB_CMS):flag_SB_CMS(SB_CMS),SumWeight(0.0), SumPair(0.0), SumTrig(0.0), CountEv(0), B00(0.0), meanNt(-1.0){
-cout << "Calling Container." << endl;
+std::cout << "Calling Container." << std::endl;
 	       if(constants::MODE.find("twopc")!=string::npos || constants::MODE.find("2dmap")!=string::npos){
 		       Hist2D = new double *[constants::x_cell_capa];
 		       Hist2DMultiComp = new MultiComp *[constants::x_cell_capa];
@@ -235,7 +234,7 @@ cout << "Calling Container." << endl;
        };
 
        ~Container(){
-	       cout << "Calling Deconstructore of Container." << endl;
+	       std::cout << "Calling Deconstructore of Container." << std::endl;
 	       //Free each sub-array
 	       if(constants::MODE.find("twopc")!=string::npos || constants::MODE.find("2dmap")!=string::npos){
 		       for(int i = 0; i < constants::x_cell_capa; i++) {
@@ -349,7 +348,7 @@ cout << "Calling Container." << endl;
 				else if(sp==5) return _cascade;
 				else if(sp==6) return _omega;
 				else {
-					cout << "ERROR :( out of range in get_sp" << sp << endl;
+					std::cout << "ERROR :( out of range in get_sp" << sp << std::endl;
 					exit(1);
 				}
 			}
@@ -363,7 +362,7 @@ cout << "Calling Container." << endl;
 				else if(sp==5) return "cascade";
 				else if(sp==6) return "omega";
 				else {
-					cout << "ERROR :( out of range in get_sp" << sp << endl;
+					std::cout << "ERROR :( out of range in get_sp" << sp << std::endl;
 					exit(1);
 				}
 			}

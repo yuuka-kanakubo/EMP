@@ -8,6 +8,7 @@
 #include "Settings.h"
 #include "LogSettings.h"
 #include "InfoHist.h"
+#include "EigenSolve.h"
 
 class EMtensFromPartons{
 

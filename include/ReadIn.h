@@ -20,6 +20,7 @@ ReadIn(shared_ptr<Message> ms_in, Settings::Options options_in);
 bool read(const int i, std::vector<Container::ParticleInfo> &part_1ev);
 bool show_readin(std::vector<Container::ParticleInfo> part_1ev){
 
+std::cout << "Showing readin data " << std::endl;
 for(const auto& elem: part_1ev)
 std::cout << elem.id << "  "
 	<< elem.e << "  "
@@ -28,8 +29,10 @@ std::cout << elem.id << "  "
 	<< elem.pz << "  "
 	<< std::endl;
 
+std::cout << "-->Showing readin data " << std::endl;
 return true;
 };
+
 int test();
 };
 #endif

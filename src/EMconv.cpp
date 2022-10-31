@@ -37,7 +37,6 @@ bool EMconv::Convert(){
 						double GAUSS=0.0;
 						int k = 0;
 						for(int k = this->get_etamin(etacenter_i); k < this->get_etamax(etacenter_i); k++ ){
-std::cout << "k " << k << "    in eta " << part.eta<< std::endl;
 							double etat = part.eta - this->get_etacoordinate(k);
 							double longFactor = (1.0/(sqrt(2*M_PI)*constants::longSmear*this->tau))*exp(-0.5*etat*etat/(constants::longSmear*constants::longSmear));
 
@@ -62,7 +61,10 @@ std::cout << "k " << k << "    in eta " << part.eta<< std::endl;
 							}//x
 						}//eta
 
+if(fabs(GAUSS-1.0)>constants::SMALL){
 	std::cout << "Gauss " << std::fixed << std::setprecision(8) << std::setw(16) << GAUSS << std::endl;
+	exit(1);
+}
 
 
 

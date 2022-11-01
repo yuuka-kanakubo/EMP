@@ -30,7 +30,9 @@ EMtensFromPartons::EMtensFromPartons(Settings::Options options_in, LogSettings l
 		auto emconv = std::make_shared<EMconv>(part_1ev, ct);
 
 
-                auto Eigen = std::make_shared<EigenSolve>(ct);
+		//Under construction: Getting e from Tmunu.
+		//=========================================
+                //auto Eigen = std::make_shared<EigenSolve>(ct);
 
 
 		//Write out in 2D format.

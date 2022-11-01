@@ -15,21 +15,21 @@ EigenSolve::~EigenSolve(){};
 //  Outputs are the energy_density, the flow and an error code (decomp_failed if no rest frame could be found, decomp_OK if epsilon and flow were found)
 void EigenSolve::get_energy_flow_from_Tmunu(double Tmunu_raised[4][4], double tau_in_GeV, double * energy_density, double flow[], enum error_codes * error_code) {
 
-//	//GSL stuff
-//	gsl_eigen_nonsymmv_workspace * eigen_ws = gsl_eigen_nonsymmv_alloc(4);
-//	const int balance_matrix=1;
-//	gsl_eigen_nonsymmv_params(balance_matrix, eigen_ws);
-//	gsl_vector_complex * eigenvalues= gsl_vector_complex_alloc (4);
-//	gsl_matrix_complex * eigenvectors=gsl_matrix_complex_alloc(4,4);
-//
-//
-//	// Make proper 4X4 matrix from Tmunu (depending on the raised and lower indices
-//	// / T^\tau_\tau   T^\tau_x    T^\tau_y    T^\tau_\eta \       / T^\tau\tau    -T^\tau x    -T^\tau y    -tau^2*T^\tau \eta
-//	// | T^x_\tau      T^x_x       T^x_y       T^x_\eta    | ==== |  T^x \tau      -T^x x       -T^x y       -tau^2*T^x \eta    |
-//	// | T^y_\tau      T^y_x       T^y_y       T^y_\eta    | ==== |  T^y \tau      -T^x y       -T^y y       -tau^2*T^y \eta    |
-//	// \ T^\eta_\tau   T^\eta_x    T^\eta_y    T^\eta_\eta /       \ T^\eta\tau    -T^\eta x    -T^\eta y    -tau^2*T^\eta\eta /
-//
-//
+	//GSL stuff
+	gsl_eigen_nonsymmv_workspace * eigen_ws = gsl_eigen_nonsymmv_alloc(4);
+	const int balance_matrix=1;
+	gsl_eigen_nonsymmv_params(balance_matrix, eigen_ws);
+	gsl_vector_complex * eigenvalues= gsl_vector_complex_alloc (4);
+	gsl_matrix_complex * eigenvectors=gsl_matrix_complex_alloc(4,4);
+
+
+	// Make proper 4X4 matrix from Tmunu (depending on the raised and lower indices
+	// / T^\tau_\tau   T^\tau_x    T^\tau_y    T^\tau_\eta \       / T^\tau\tau    -T^\tau x    -T^\tau y    -tau^2*T^\tau \eta
+	// | T^x_\tau      T^x_x       T^x_y       T^x_\eta    | ==== |  T^x \tau      -T^x x       -T^x y       -tau^2*T^x \eta    |
+	// | T^y_\tau      T^y_x       T^y_y       T^y_\eta    | ==== |  T^y \tau      -T^x y       -T^y y       -tau^2*T^y \eta    |
+	// \ T^\eta_\tau   T^\eta_x    T^\eta_y    T^\eta_\eta /       \ T^\eta\tau    -T^\eta x    -T^\eta y    -tau^2*T^\eta\eta /
+
+
 //	const double Ttautau=Tmunu_raised[0][0];
 //	const double Ttaux  =Tmunu_raised[0][1];
 //	const double Ttauy  =Tmunu_raised[0][2];

@@ -1,6 +1,6 @@
-# YKANA
+# EMP
 
-Analysis code by Yuuka.
-
-Give an appropriate option when you compile.
-cmake -DCMAKE_CXX_FLAGS=“-DWORK5” ..
+Cmake with
+```
+$cmake -DCMAKE_CXX_FLAGS="-DTWODMAP"  ..
+```

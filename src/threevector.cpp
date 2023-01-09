@@ -7,11 +7,10 @@
  *
  */
 
-#include "smash/threevector.h"
+#include "threevector.h"
 
-#include "smash/iomanipulators.h"
+#include "iomanipulators.h"
 
-namespace smash {
 
 std::ostream &operator<<(std::ostream &out, const ThreeVector &v) {
   out.put('(');
@@ -22,4 +21,3 @@ std::ostream &operator<<(std::ostream &out, const ThreeVector &v) {
   return out << ')';
 }
 
-}  // namespace smash

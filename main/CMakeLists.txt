@@ -5,3 +5,4 @@ set(
 add_executable(EMP main.cpp)
 target_link_libraries(EMP EMP_LIB)
 target_link_libraries(EMP GSL::gsl GSL::gslcblas)
+#target_link_libraries(EMP Eigen3::Eigen)

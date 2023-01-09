@@ -7,11 +7,10 @@
 #include <cmath>
 #include <iostream>
 
-#include "smash/fourvector.h"
-#include "smash/iomanipulators.h"
-#include "smash/numerics.h"
+#include "fourvector.h"
+#include "iomanipulators.h"
+#include "numerics.h"
 
-namespace smash {
 
 FourVector FourVector::lorentz_boost(const ThreeVector& v) const {
   const double velocity_squared = v.sqr();
@@ -42,4 +41,3 @@ std::ostream& operator<<(std::ostream& out, const FourVector& vec) {
   return out << ')';
 }
 
-}  // namespace smash

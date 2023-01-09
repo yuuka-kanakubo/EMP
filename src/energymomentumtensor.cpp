@@ -7,17 +7,16 @@
  *
  */
 
-#include "smash/energymomentumtensor.h"
+#include "energymomentumtensor.h"
 
 #include <iomanip>
 #include <iostream>
 
 #include <Eigen/Dense>  // NOLINT(build/include_order)
 
-#include "smash/logging.h"
-#include "smash/numerics.h"
+#include "logging.h"
+#include "numerics.h"
 
-namespace smash {
 static constexpr int LTmn = LogArea::Tmn::id;
 
 FourVector EnergyMomentumTensor::landau_frame_4velocity() const {
@@ -46,7 +45,7 @@ FourVector EnergyMomentumTensor::landau_frame_4velocity() const {
        -Tmn_[3], -Tmn_[6], -Tmn_[8], -Tmn_[9];
   // clang-format on
 
-  logg[LTmn].debug("Looking for Landau frame for T_{mu}^{nu} ", A);
+  //logg[LTmn].debug("Looking for Landau frame for T_{mu}^{nu} ", A);
   Eigen::EigenSolver<Matrix4d> es(A);
 
   Vector4d eig_im = es.eigenvalues().imag();
@@ -65,26 +64,31 @@ std::cout << "ME:) " << eig_re(i) << std::endl;
   // corresponding to pressure should be non-positive, because of the
   // metric tensor gmunu = (1, -1, -1, -1) convention.
   if (i_maxeigenvalue != 0) {
-    logg[LTmn].warn(
-        "The Tmn diagonalization code previously relied on assumption that"
-        " 0th eigenvalue is the largest one. It seems to be always fulfilled "
-        "in practice, but not guaranteed by Eigen. Here is Tmn * gmn, ",
-        A, " for which it is not fulfilled. Please let Dima(oliiny) know.");
+    //logg[LTmn].warn(
+     //   "The Tmn diagonalization code previously relied on assumption that"
+      //  " 0th eigenvalue is the largest one. It seems to be always fulfilled "
+       // "in practice, but not guaranteed by Eigen. Here is Tmn * gmn, ",
+        //A, " for which it is not fulfilled. Please let Dima(oliiny) know.");
+std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
+exit(1);
   }
   for (size_t i = 0; i < 4; i++) {
     if (std::abs(eig_im(i)) > really_small) {
-      logg[LTmn].error("Tmn*gmn\n ", A, "\n has a complex eigenvalue ",
-                       eig_re(i), " + i * ", eig_im(i));
+std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
+      //logg[LTmn].error("Tmn*gmn\n ", A, "\n has a complex eigenvalue ",
+       //                eig_re(i), " + i * ", eig_im(i));
     }
     if (i == i_maxeigenvalue && eig_re(i) < -really_small) {
-      logg[LTmn].error("Tmn*gmn\n", A,
-                       "\nenergy density eigenvalue is not positive ",
-                       eig_re(i), " + i * ", eig_im(i));
-      logg[LTmn].error("i_max = ", i_maxeigenvalue);
+std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
+      //logg[LTmn].error("Tmn*gmn\n", A,
+       //                "\nenergy density eigenvalue is not positive ",
+        //               eig_re(i), " + i * ", eig_im(i));
+      //logg[LTmn].error("i_max = ", i_maxeigenvalue);
     }
     if (i != i_maxeigenvalue && eig_re(i) > really_small) {
-      logg[LTmn].error("Tmn*gmn\n", A, "\npressure eigenvalue is not negative ",
-                       eig_re(i), " + i * ", eig_im(i));
+std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
+      //logg[LTmn].error("Tmn*gmn\n", A, "\npressure eigenvalue is not negative ",
+       //                eig_re(i), " + i * ", eig_im(i));
     }
   }
 
@@ -105,11 +109,12 @@ std::cout << "ME:) u (after sign treatment) " << u << std::endl;
   if (u_sqr > really_small) {
     u /= std::sqrt(u_sqr);
   } else {
-    logg[LTmn].error(
-        "Landau frame is not defined.", " Eigen vector", u, " of ", A,
-        " is not time-like and",
-        " cannot be 4-velocity. This may happen if energy-momentum",
-        " tensor was constructed for a massless particle.");
+    //logg[LTmn].error(
+     //   "Landau frame is not defined.", " Eigen vector", u, " of ", A,
+      //  " is not time-like and",
+       // " cannot be 4-velocity. This may happen if energy-momentum",
+        //" tensor was constructed for a massless particle.");
+std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
     u = FourVector(1., 0., 0., 0.);
   }
 std::cout << "ME:) u (after normalization) " << u << std::endl;
@@ -158,11 +163,11 @@ void EnergyMomentumTensor::add_particle(const FourVector &mom) {
   Tmn_[9] += mom[3] * tmp.x3();
 }
 
-void EnergyMomentumTensor::add_particle(const ParticleData &p, double factor) {
-  if (factor != 0) {
-    add_particle(p.momentum() * factor);
-  }
-}
+//void EnergyMomentumTensor::add_particle(const ParticleData &p, double factor) {
+ // if (factor != 0) {
+  //  add_particle(p.momentum() * factor);
+ // }
+//}
 
 std::ostream &operator<<(std::ostream &out, const EnergyMomentumTensor &Tmn) {
   out.width(12);
@@ -176,4 +181,3 @@ std::ostream &operator<<(std::ostream &out, const EnergyMomentumTensor &Tmn) {
   return out;
 }
 
-}  // namespace smash

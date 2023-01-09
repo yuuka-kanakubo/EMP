@@ -9,6 +9,7 @@
 #include "LogSettings.h"
 #include "InfoHist.h"
 #include "EigenSolve.h"
+#include "energymomentumtensor.h"
 
 class EMtensFromPartons{
 

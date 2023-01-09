@@ -33,6 +33,10 @@ EMtensFromPartons::EMtensFromPartons(Settings::Options options_in, LogSettings l
 		//Under construction: Getting e from Tmunu.
 		//=========================================
                 //auto Eigen = std::make_shared<EigenSolve>(ct);
+		EnergyMomentumTensor T(
+				{100., 1.0, 10., 3.3, 30.0, 4.3, 5.5, 29.9, 11.0, 40.0});
+		const FourVector u = T.landau_frame_4velocity();
+                std::cout << "Eigen vec u " << u << std::endl; 
 
 
 		//Write out in 2D format.

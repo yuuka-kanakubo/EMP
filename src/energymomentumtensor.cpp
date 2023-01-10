@@ -52,7 +52,7 @@ FourVector EnergyMomentumTensor::landau_frame_4velocity() const {
   Vector4d eig_re = es.eigenvalues().real();
   size_t i_maxeigenvalue = 0;
   for (size_t i = 0; i < 4; i++) {
-std::cout << "ME:) " << eig_re(i) << std::endl;
+//std::cout << "ME:) " << eig_re(i) << std::endl;
     if (eig_re(i_maxeigenvalue) < eig_re(i)) {
       i_maxeigenvalue = i;
     }
@@ -93,10 +93,10 @@ std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
   }
 
   Vector4d tmp = es.eigenvectors().col(i_maxeigenvalue).real();
-std::cout << "ME:) es.eigenvectors() " << es.eigenvectors()  << std::endl;
-std::cout << "ME:) i_maxeigenvalue " << i_maxeigenvalue << std::endl;
-std::cout << "ME:) es.eigenvectors().col() " << es.eigenvectors().col(i_maxeigenvalue)  << std::endl;
-std::cout << "ME:) tmp " << tmp << std::endl;
+//std::cout << "ME:) es.eigenvectors() " << es.eigenvectors()  << std::endl;
+//std::cout << "ME:) i_maxeigenvalue " << i_maxeigenvalue << std::endl;
+//std::cout << "ME:) es.eigenvectors().col() " << es.eigenvectors().col(i_maxeigenvalue)  << std::endl;
+//std::cout << "ME:) tmp " << tmp << std::endl;
   // Choose sign so that zeroth component is positive because we want
   // 4-velocity to have 0-component positive
   if (tmp(0) < 0.0) {
@@ -104,7 +104,7 @@ std::cout << "ME:) tmp " << tmp << std::endl;
   }
 
   FourVector u(tmp(0), tmp(1), tmp(2), tmp(3));
-std::cout << "ME:) u (after sign treatment) " << u << std::endl;
+//std::cout << "ME:) u (after sign treatment) " << u << std::endl;
   const double u_sqr = u.sqr();
   if (u_sqr > really_small) {
     u /= std::sqrt(u_sqr);
@@ -117,7 +117,7 @@ std::cout << "ME:) u (after sign treatment) " << u << std::endl;
 std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
     u = FourVector(1., 0., 0., 0.);
   }
-std::cout << "ME:) u (after normalization) " << u << std::endl;
+//std::cout << "ME:) u (after normalization) " << u << std::endl;
   return u;
 }
 

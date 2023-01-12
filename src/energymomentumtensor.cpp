@@ -64,43 +64,46 @@ FourVector EnergyMomentumTensor::landau_frame_4velocity() const {
   // corresponding to pressure should be non-positive, because of the
   // metric tensor gmunu = (1, -1, -1, -1) convention.
   if (i_maxeigenvalue != 0) {
-    //logg[LTmn].warn(
-     //   "The Tmn diagonalization code previously relied on assumption that"
-      //  " 0th eigenvalue is the largest one. It seems to be always fulfilled "
-       // "in practice, but not guaranteed by Eigen. Here is Tmn * gmn, ",
-        //A, " for which it is not fulfilled. Please let Dima(oliiny) know.");
-std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
-exit(1);
+	  //logg[LTmn].warn(
+	  //   "The Tmn diagonalization code previously relied on assumption that"
+	  //  " 0th eigenvalue is the largest one. It seems to be always fulfilled "
+	  // "in practice, but not guaranteed by Eigen. Here is Tmn * gmn, ",
+	  //   A, " for which it is not fulfilled. Please let Dima(oliiny) know.");
+	  if(fabs(eig_re(i_maxeigenvalue))>constants::SMALL){
+		  std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
+		  std::cout << " i_maxeigenvalue is not 0. eigen_re :" << eig_re << std::endl;
+		  exit(1);
+	  }
   }
   for (size_t i = 0; i < 4; i++) {
-    if (std::abs(eig_im(i)) > really_small) {
-std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
-      //logg[LTmn].error("Tmn*gmn\n ", A, "\n has a complex eigenvalue ",
-       //                eig_re(i), " + i * ", eig_im(i));
-    }
+	  if (std::abs(eig_im(i)) > really_small) {
+		  std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
+		  //logg[LTmn].error("Tmn*gmn\n ", A, "\n has a complex eigenvalue ",
+		  //                eig_re(i), " + i * ", eig_im(i));
+	  }
     if (i == i_maxeigenvalue && eig_re(i) < -really_small) {
-std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
-      //logg[LTmn].error("Tmn*gmn\n", A,
-       //                "\nenergy density eigenvalue is not positive ",
-        //               eig_re(i), " + i * ", eig_im(i));
-      //logg[LTmn].error("i_max = ", i_maxeigenvalue);
+	    std::cout << "SOMETHING IS WRONG " << __FILE__ << "  " << __LINE__ << std::endl;
+	    //logg[LTmn].error("Tmn*gmn\n", A,
+	    //                "\nenergy density eigenvalue is not positive ",
+	    //               eig_re(i), " + i * ", eig_im(i));
+	    //logg[LTmn].error("i_max = ", i_maxeigenvalue);
     }
     if (i != i_maxeigenvalue && eig_re(i) > really_small) {
-std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
-      //logg[LTmn].error("Tmn*gmn\n", A, "\npressure eigenvalue is not negative ",
-       //                eig_re(i), " + i * ", eig_im(i));
+	    std::cout << "SOMETHING IS WRONG " << __FILE__ << "  " << __LINE__ << std::endl;
+	    //logg[LTmn].error("Tmn*gmn\n", A, "\npressure eigenvalue is not negative ",
+	    //                eig_re(i), " + i * ", eig_im(i));
     }
   }
 
   Vector4d tmp = es.eigenvectors().col(i_maxeigenvalue).real();
-//std::cout << "ME:) es.eigenvectors() " << es.eigenvectors()  << std::endl;
-//std::cout << "ME:) i_maxeigenvalue " << i_maxeigenvalue << std::endl;
-//std::cout << "ME:) es.eigenvectors().col() " << es.eigenvectors().col(i_maxeigenvalue)  << std::endl;
-//std::cout << "ME:) tmp " << tmp << std::endl;
+  //std::cout << "ME:) es.eigenvectors() " << es.eigenvectors()  << std::endl;
+  //std::cout << "ME:) i_maxeigenvalue " << i_maxeigenvalue << std::endl;
+  //std::cout << "ME:) es.eigenvectors().col() " << es.eigenvectors().col(i_maxeigenvalue)  << std::endl;
+  //std::cout << "ME:) tmp " << tmp << std::endl;
   // Choose sign so that zeroth component is positive because we want
   // 4-velocity to have 0-component positive
   if (tmp(0) < 0.0) {
-    tmp = -tmp;
+	  tmp = -tmp;
   }
 
   FourVector u(tmp(0), tmp(1), tmp(2), tmp(3));
@@ -109,13 +112,22 @@ std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
   if (u_sqr > really_small) {
     u /= std::sqrt(u_sqr);
   } else {
-    //logg[LTmn].error(
-     //   "Landau frame is not defined.", " Eigen vector", u, " of ", A,
-      //  " is not time-like and",
-       // " cannot be 4-velocity. This may happen if energy-momentum",
-        //" tensor was constructed for a massless particle.");
-std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
-    u = FourVector(1., 0., 0., 0.);
+	  //logg[LTmn].error(
+	  //   "Landau frame is not defined.", " Eigen vector", u, " of ", A,
+	  //  " is not time-like and",
+	  // " cannot be 4-velocity. This may happen if energy-momentum",
+	  //" tensor was constructed for a massless particle.");
+	  if(u_sqr<0.0){
+		  std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
+		  std::cout << ":( u is time like. u:" << u << ",  sqrt u: " << u_sqr << std::endl;
+		  std::cout << "                   sqrt u0:" << u[0]*u[0] << ",  sqrt ui " << u[1]*u[1] + u[2]*u[2] + u[3]*u[3] << std::endl;
+		  std::cout << "                          --> Replacing it into time like (1., 0., 0., 0.) " << std::endl;
+		  u = FourVector(1., 0., 0., 0.);
+		  //TODO: I might consider replacing the space-like vector with new time like vector artificially modifying the time component of u.
+		  //exit(1);
+	  }else{
+		  u = FourVector(1., 0., 0., 0.);
+	  }
   }
 //std::cout << "ME:) u (after normalization) " << u << std::endl;
   return u;

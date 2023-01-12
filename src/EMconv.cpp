@@ -29,34 +29,66 @@ bool EMconv::Convert(){
 						//=============================================
 						int xcenter_i=get_xcell(part.x);
 						int ycenter_i=get_ycell(part.y);
-						int etacenter_i=get_etacell(part.eta);
+						//TODO: Obtain Tmunu in Milne
+						//int etacenter_i=get_etacell(part.eta);
+						int etacenter_i=get_etacell(part.z);
+
+
+						//If the particle is outside of the cells, then neglect them.
+						//=============================================================
+						double etamin = this->get_etamin(etacenter_i);
+						double etamax = this->get_etamax(etacenter_i);
+						//if(etamin<0 || etamax<0) continue;
+						double xmin = this->get_xmin(xcenter_i);
+						double xmax = this->get_xmax(xcenter_i);
+						//if(xmin<0 || xmax<0) continue;
+						double ymin = this->get_ymin(ycenter_i);
+						double ymax = this->get_ymax(ycenter_i);
+						//if(ymin<0 || ymax<0) continue;
 
 						//Get nx and ny.
 						//Loop over the distribution.
 						//============================
 						double GAUSS=0.0;
 						int k = 0;
-						for(int k = this->get_etamin(etacenter_i); k < this->get_etamax(etacenter_i); k++ ){
-							double etat = part.eta - this->get_etacoordinate(k);
-							double longFactor = (1.0/(sqrt(2*M_PI)*constants::longSmear*this->tau))*exp(-0.5*etat*etat/(constants::longSmear*constants::longSmear));
+						for(int k = etamin; k < etamax; k++ ){
+							//TODO: Obtain Tmunu in Milne
+							//double etat = part.eta - this->get_etacoordinate(k);
+							double etat = part.z - this->get_etacoordinate(k);
+							//TODO: Obtain Tmunu in Milne
+							//double longFactor = (1.0/(sqrt(2*M_PI)*constants::longSmear*this->tau))*exp(-0.5*etat*etat/(constants::longSmear*constants::longSmear));
+							double longFactor = (1.0/(sqrt(2*M_PI)*constants::longSmear))*exp(-0.5*etat*etat/(constants::longSmear*constants::longSmear));
 
-							//Get how much pmu should be deposited: Tmunu
+								//Get how much pmu should be deposited: Tmunu
 							//==========================================
-							for( int i = this->get_xmin(xcenter_i); i < this->get_xmax(xcenter_i); i++ ){
-								for( int j = this->get_ymin(ycenter_i); j < this->get_ymax(ycenter_i); j++ ){
+								for( int i = xmin; i < xmax; i++ ){
+									for( int j = ymin; j < ymax; j++ ){
 									double xt = this->get_xcoordinate(i) - part.x;
 									double yt = this->get_ycoordinate(j) - part.y; 
 									double transFactor = (1.0/(2*M_PI*constants::transSmear*constants::transSmear))*exp(-0.5*(xt*xt+yt*yt)/(constants::transSmear*constants::transSmear) );
-									double invV=1.0/(constants::dl*constants::dl*this->tau*this->detas);
-									if(k==84){
-										ct->Hist2DMultiComp[i][j].tt+=invV*(part.e*part.e/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
-										ct->Hist2DMultiComp[i][j].xx+=invV*(part.px*part.px/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
-										ct->Hist2DMultiComp[i][j].yy+=invV*(part.py*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
-										ct->Hist2DMultiComp[i][j].zz+=invV*(part.pz*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
-										ct->Hist2DMultiComp[i][j].xy+=invV*(part.pz*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
-										ct->Hist2DMultiComp[i][j].xz+=invV*(part.px*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
-									}
-									GAUSS+=transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+									//TODO: Obtain Tmunu in Milne
+									//double invV=1.0/(constants::dl*constants::dl*this->tau*this->detas);
+									double invV=1.0/(constants::dl*constants::dl*this->detas);
+
+									//Seeing only midarapidity.
+									//========================
+									//TODO: Obtain Tmunu in Milne
+									//ct->Hist2DMultiComp[i][j].tt+=invV*(part.e*part.e/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+							if(k==84){
+										ct->Hist2DMultiComp[i][j].tt+=invV*(part.e*part.e/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i][j].tx+=invV*(part.e*part.px/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i][j].ty+=invV*(part.e*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i][j].tz+=invV*(part.e*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i][j].xx+=invV*(part.px*part.px/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i][j].xy+=invV*(part.px*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i][j].xz+=invV*(part.px*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i][j].yy+=invV*(part.py*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i][j].yz+=invV*(part.py*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i][j].zz+=invV*(part.pz*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+									}//only midy
+										//TODO: Obtain Tmunu in Milne
+										//GAUSS+=transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
+									GAUSS+=transFactor*longFactor*constants::dl*constants::dl*this->detas;
 								}//y
 							}//x
 						}//eta

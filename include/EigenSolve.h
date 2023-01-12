@@ -2,6 +2,7 @@
 #define EigenSolve_H
 
 #include "Container.h"
+#include "energymomentumtensor.h"
 #include <memory>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_sf_bessel.h>
@@ -22,10 +23,9 @@ class EigenSolve{
 
 
   private:
+  std::shared_ptr<Container>& ct;
+  void Solve();
 
-enum error_codes { decomp_ok=0, decomp_failed=2};
-  void get_energy_flow_from_Tmunu(double Tmunu_raised[4][4], double tau_in_GeV, double * energy_density, double flow[], enum error_codes * error_code);
-  bool parse_eigensystem(double tau_in_GeV, double im_tolerance, gsl_matrix * matrix_orig, gsl_vector_complex * eigenvalues, gsl_matrix_complex * eigenvectors, double * energy, double flow[]);
 
 };
 #endif

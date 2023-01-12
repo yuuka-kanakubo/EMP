@@ -412,6 +412,7 @@ inline	const double default_midy_pm = 0.5;
 inline	const double LARGE=1.0e+16;
 inline	const int LARGEint=10000;
 inline	const double SMALL=1.0e-5;
+inline	const double TINY=1.0e-16;
 inline	const double multip_cut_more_than=-LARGE;
 inline	const double multip_cut_less_than=LARGE;
 

@@ -1,4 +1,4 @@
-#include "EMtensFromPartons.h"
+#include "EMP.h"
 
 int main(int argc, char* argv[]){
 
@@ -7,7 +7,7 @@ int main(int argc, char* argv[]){
 	ms->TestMode();
 
 	auto setting = std::make_shared<Settings>(argc, argv);
-	auto emp = std::make_shared<EMtensFromPartons>(setting->options, setting->log);
+	auto emp = std::make_shared<EMP>(setting->options, setting->log);
 
 	std::cout << "DONE:)" << std::endl; 
 

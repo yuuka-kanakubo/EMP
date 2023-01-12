@@ -84,27 +84,41 @@ class Container{
 
 		 public:
 			 double tt; 
-			 double xx; 
-			 double yy; 
-			 double zz; 
 			 double tx; 
 			 double ty; 
 			 double tz; 
+			 double xx; 
 			 double xy; 
 			 double xz; 
+			 double yy; 
 			 double yz; 
+			 double zz; 
+			 double eLOCAL; 
+			 double PxLOCAL; 
+			 double PyLOCAL; 
+			 double PzLOCAL; 
+			 double pixyLOCAL; 
+
+
+
 			 void init_zero(){
 
-                          tt=0.0;
-			  xx=0.0; 
-			  yy=0.0; 
-			  zz=0.0; 
-			  tx=0.0; 
-			  ty=0.0; 
-			  tz=0.0; 
-			  xy=0.0; 
-			  xz=0.0; 
-			  yz=0.0; 
+			 tt=0.0; 
+			 tx=0.0; 
+			 ty=0.0; 
+			 tz=0.0; 
+			 xx=0.0; 
+			 xy=0.0; 
+			 xz=0.0; 
+			 yy=0.0; 
+			 yz=0.0; 
+			 zz=0.0; 
+			 eLOCAL=0.0; 
+			 PxLOCAL=0.0; 
+			 PyLOCAL=0.0; 
+			 PzLOCAL=0.0; 
+			 pixyLOCAL=0.0; 
+
 
 			 }
 

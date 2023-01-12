@@ -1,11 +1,9 @@
 #!/bin/sh
 
-DIR="../pythia8244/dynamical_fragmentation/data/20221026_initial_PBPB2.76TeV_MB_pT0Ref0.9_test"
-#DIR="/home/yuuka/some_jets/npdf_proton_0"
+DIR="/n/work02/yukanaku/pythia8244/dynamical_fragmentation/data/EKRT_0_5_A_SAT_MC"
 EV="ev"
-EXT="initial.txt"
-#EXT="jets_SAT_MC.txt"
-outputdir="test"
+EXT="Readable_initial.txt"
+outputdir="EKRT_0_5_A_SAT_MC"
 n=1
 
 

@@ -51,17 +51,20 @@ ReadIn(shared_ptr<Message> ms_in, Settings::Options options_in);
 ~ReadIn(){};
 
 bool read(const int i, std::vector<Container::ParticleInfo> &part_1ev);
-bool show_readin(std::vector<Container::ParticleInfo> part_1ev){
+bool show_readin(std::vector<Container::ParticleInfo> part_1ev, const bool ALL){
 
 std::cout << "Showing readin data " << std::endl;
-for(const auto& elem: part_1ev)
+int count = 0;
+for(const auto& elem: part_1ev){
+count++;
 std::cout << elem.id << "  "
 	<< elem.e << "  "
 	<< elem.px << "  "
 	<< elem.py << "  "
 	<< elem.pz << "  "
 	<< std::endl;
-
+if(!ALL && count>10) break;
+}
 std::cout << "-->Showing readin data " << std::endl;
 return true;
 };

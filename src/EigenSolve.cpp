@@ -12,6 +12,7 @@ void EigenSolve::Solve(){
 
 //Loop over the entire space in x, y.
 //========================================
+								int COUNTER=0;
 				for(int i=0; i<constants::x_cell_capa; ++i){
 							for(int j=0; j<constants::y_cell_capa; ++j){
 
@@ -34,6 +35,22 @@ void EigenSolve::Solve(){
 								const FourVector u = T.landau_frame_4velocity();
 
 								EnergyMomentumTensor TL = T.boosted(u);
+
+
+								//Sanity check
+								//===============
+								if(COUNTER < 5 && this->ct->Hist2DMultiComp[i][j].tt>constants::DECENT){
+									double e_COLLIDER = T.GetEigenVal();
+
+									const FourVector u__DUMMY = TL.landau_frame_4velocity();
+									double e_LOCALRST = TL.GetEigenVal();
+
+									std::cout << "e_COLLIDER: " << e_COLLIDER << ",  umu : " << u << std::endl;
+									std::cout << "e_LOCALRST: " << e_LOCALRST << ",  umu : " << u__DUMMY << std::endl;
+									std::cout << std::endl;
+									COUNTER++;
+								}
+
 								//std::cout << "Eigen vec u " << u << std::endl; 
 								//Archiving solutions (e, umu...) in Container.
 								//==========================================

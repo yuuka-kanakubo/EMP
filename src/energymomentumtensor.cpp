@@ -51,10 +51,13 @@ FourVector EnergyMomentumTensor::landau_frame_4velocity() const {
   Vector4d eig_im = es.eigenvalues().imag();
   Vector4d eig_re = es.eigenvalues().real();
   size_t i_maxeigenvalue = 0;
+  this->EigenVal(eig_re(0));
+  this->SetEigenVal();
   for (size_t i = 0; i < 4; i++) {
 //std::cout << "ME:) " << eig_re(i) << std::endl;
     if (eig_re(i_maxeigenvalue) < eig_re(i)) {
       i_maxeigenvalue = i;
+      this->EigenVal(eig_re(i));
     }
   }
 

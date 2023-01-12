@@ -1,0 +1,93 @@
+Hello:)
+MODE: 2dmap
+ReadIn
+Calling Container.
+Reading ;) 0 files..
+Showing readin data 
+21  29.9876  -8.22146  -25.1494  14.1128  
+21  29.9876  8.22146  25.1494  14.1128  
+21  19.7314  4.5345  -19.1707  1.11813  
+21  20.7  -4.5345  19.1707  6.35713  
+21  24.0448  17.1736  -4.09775  -16.3227  
+21  19.7425  -17.1736  4.09775  -8.83406  
+21  20.0646  2.97535  -15.7477  -12.0724  
+21  16.2044  -2.97535  15.7477  -2.39588  
+-->Showing readin data 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.17956 -0.83850 -0.27726  0.43337),  sqrt u: -0.93551
+                   sqrt u0:0.03224,  sqrt ui 0.96776
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+e_COLLIDER: 1.40659,  umu : (  1.09255 -0.00291  0.01539  0.43979)
+e_LOCALRST: 1.40659,  umu : (  1.00000  0.00000  0.00000  0.00000)
+
+e_COLLIDER: 1.88847,  umu : (  1.08434  0.01822 -0.09644  0.40762)
+e_LOCALRST: 1.88847,  umu : (  1.00000  0.00000  0.00000  0.00000)
+
+e_COLLIDER: 1.76892,  umu : (  1.09122  0.03960 -0.20961  0.38112)
+e_LOCALRST: 1.76892,  umu : (  1.00000  0.00000  0.00000  0.00000)
+
+e_COLLIDER: 1.15600,  umu : (  1.11329  0.06154 -0.32570  0.35993)
+e_LOCALRST: 1.15600,  umu : (  1.00000  0.00000 -0.00000  0.00000)
+
+e_COLLIDER: 0.73208,  umu : (  1.16400 -0.04971  0.26309  0.53218)
+e_LOCALRST: 0.73208,  umu : (  1.00000 -0.00000 -0.00000  0.00000)
+
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.19600 -0.52855 -0.82374 -0.06057),  sqrt u: -0.92317
+                   sqrt u0:0.03842,  sqrt ui 0.96158
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.18614  0.32092  0.83728  0.40165),  sqrt u: -0.93071
+                   sqrt u0:0.03465,  sqrt ui 0.96535
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.35725  0.07393  0.84452  0.39204),  sqrt u: -0.74474
+                   sqrt u0:0.12763,  sqrt ui 0.87237
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.00000  0.68101 -0.05465  0.73023),  sqrt u: -1.00000
+                   sqrt u0:0.00000,  sqrt ui 1.00000
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.29755 -0.84744 -0.10283 -0.42748),  sqrt u: -0.82293
+                   sqrt u0:0.08854,  sqrt ui 0.91146
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.11027 -0.47764 -0.86282 -0.12349),  sqrt u: -0.97568
+                   sqrt u0:0.01216,  sqrt ui 0.98784
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.00000  0.68011 -0.06008  0.73065),  sqrt u: -1.00000
+                   sqrt u0:0.00000,  sqrt ui 1.00000
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.20903 -0.31210 -0.90350  0.20637),  sqrt u: -0.91261
+                   sqrt u0:0.04369,  sqrt ui 0.95631
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.00000  0.17042  0.98306 -0.06749),  sqrt u: -1.00000
+                   sqrt u0:0.00000,  sqrt ui 1.00000
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.20823 -0.37031 -0.89413  0.14160),  sqrt u: -0.91328
+                   sqrt u0:0.04336,  sqrt ui 0.95664
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.12567  0.35482 -0.59712  0.70835),  sqrt u: -0.96841
+                   sqrt u0:0.01579,  sqrt ui 0.98421
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.00000  0.17042  0.98306 -0.06749),  sqrt u: -1.00000
+                   sqrt u0:0.00000,  sqrt ui 1.00000
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.00000  0.22723  0.97383 -0.00540),  sqrt u: -1.00000
+                   sqrt u0:0.00000,  sqrt ui 1.00000
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+SOMETHING IS WRONG /n/work02/yukanaku/EMP/src/energymomentumtensor.cpp  124
+:( u is time like. u:(  0.00000  0.17042  0.98306 -0.06749),  sqrt u: -1.00000
+                   sqrt u0:0.00000,  sqrt ui 1.00000
+                          --> Replacing it into time like (1., 0., 0., 0.) 
+write
+Calling Deconstructore of Container.
+DONE:)

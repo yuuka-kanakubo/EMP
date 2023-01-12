@@ -17,12 +17,15 @@ bool EMconv::Convert(){
 		//=============
 	for(const auto& part: part_1ev){
 
-	//	std::cout << part.id << "  "
-	//		<< part.e << "  "
-	//		<< part.px << "  "
-	//		<< part.py << "  "
-	//		<< part.pz << "  "
-	//		<< std::endl;
+//		std::cout << part.id << "  "
+//			<< part.e << "  "
+//			<< part.px << "  "
+//			<< part.py << "  "
+//			<< part.pz << "  "
+//			<< part.x << "  "
+//			<< part.y << "  "
+//			<< part.z << "  "
+//			<< std::endl;
 
 
 						//Get cell index of the position of each particle.
@@ -38,6 +41,9 @@ bool EMconv::Convert(){
 						//=============================================================
 						double etamin = this->get_etamin(etacenter_i);
 						double etamax = this->get_etamax(etacenter_i);
+//std::cout << "etamin  " << etamin << std::endl;
+//std::cout << "etamax  " << etamax << std::endl;
+
 						//if(etamin<0 || etamax<0) continue;
 						double xmin = this->get_xmin(xcenter_i);
 						double xmax = this->get_xmax(xcenter_i);
@@ -45,6 +51,10 @@ bool EMconv::Convert(){
 						double ymin = this->get_ymin(ycenter_i);
 						double ymax = this->get_ymax(ycenter_i);
 						//if(ymin<0 || ymax<0) continue;
+//std::cout << "xmin  " << xmin << std::endl;
+//std::cout << "xmax  " << xmax << std::endl;
+//std::cout << "ymin  " << ymin << std::endl;
+//std::cout << "ymax  " << ymax << std::endl;
 
 						//Get nx and ny.
 						//Loop over the distribution.
@@ -58,6 +68,7 @@ bool EMconv::Convert(){
 							//TODO: Obtain Tmunu in Milne
 							//double longFactor = (1.0/(sqrt(2*M_PI)*constants::longSmear*this->tau))*exp(-0.5*etat*etat/(constants::longSmear*constants::longSmear));
 							double longFactor = (1.0/(sqrt(2*M_PI)*constants::longSmear))*exp(-0.5*etat*etat/(constants::longSmear*constants::longSmear));
+//std::cout << "  Smearing  in z: " << this->get_etacoordinate(k) << std::endl;
 
 								//Get how much pmu should be deposited: Tmunu
 							//==========================================

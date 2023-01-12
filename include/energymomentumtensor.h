@@ -14,6 +14,7 @@
 
 #include <array>
 #include <string>
+#include <iostream>
 
 #include "fourvector.h"
 #include "Constants.h"
@@ -31,13 +32,36 @@ class EnergyMomentumTensor {
   /// The energy-momentum tensor is symmetric and has 10 independent components
   typedef std::array<double, 10> tmn_type;
   /// Default constructor (nulls all components)
-  EnergyMomentumTensor() { Tmn_.fill(0.); }
+  EnergyMomentumTensor() {
+    this->EigenVal_=-1.;
+    this->SetEigenVal_=false;
+    Tmn_.fill(0.); 
+  }
+
+
+  //Added by yuuka.
+  double GetEigenVal(){
+	  if(this->SetEigenVal_)
+		  return this->EigenVal_;
+	  else{
+ 
+             std::cout << ":( ERROR, eigen value is not calculated." << std::endl;
+	     exit(1);
+
+	  }
+  }
+
+  void EigenVal(const double val){this->EigenVal_=val;}
+  void SetEigenVal(){this->SetEigenVal_=true;}
+
 
   /**
    * Copy constructor
    * \param[in] Tmn Components of the energy-momentum tensor
    */
   explicit EnergyMomentumTensor(const tmn_type &Tmn) {
+    this->EigenVal_=-1.;
+    this->SetEigenVal_=false;
     for (size_t i = 0; i < 10; i++) {
       Tmn_[i] = Tmn[i];
     }
@@ -141,6 +165,8 @@ class EnergyMomentumTensor {
    * of independent components reduces to 10.
    */
   tmn_type Tmn_;
+  double EigenVal_;
+  bool SetEigenVal_;
 };
 
 /**

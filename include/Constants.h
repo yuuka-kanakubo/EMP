@@ -410,6 +410,7 @@ inline	const double pPb_mid_rapidity__bkw=0.0;
 inline	const double pPb_rap_shift_from_lab_to_cm=0.465;
 inline	const double default_midy_pm = 0.5;
 inline	const double LARGE=1.0e+16;
+inline	const double DECENT=1.0;
 inline	const int LARGEint=10000;
 inline	const double SMALL=1.0e-5;
 inline	const double TINY=1.0e-16;

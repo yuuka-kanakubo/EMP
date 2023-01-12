@@ -2,8 +2,8 @@
 
 DIR="/n/work02/yukanaku/pythia8244/dynamical_fragmentation/data/EKRT_0_5_A_SAT_MC"
 EV="ev"
-EXT="Readable_initialtest.txt"
-outputdir="EKRT_0_5_A_SAT_MC"
+EXT="Readable_initial.txt"
+outputdir="EKRT_0_5_A_SAT_MC_zx"
 n=1
 
 
@@ -47,5 +47,5 @@ fi
 # --vs_Multi 2 \
 
 ./EMP \
- -n $n -outdir ${outputdir} -dir ${DIR} -f ${EV} -ext ${EXT} 
+ -n $n -outdir ${outputdir} -dir ${DIR} -f ${EV} -ext ${EXT}   --TWODMAP_zx
  #> ${log_dname}${log_fname}.log  2>&1  &

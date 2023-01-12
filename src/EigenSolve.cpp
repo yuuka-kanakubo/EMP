@@ -1,6 +1,6 @@
 #include "EigenSolve.h"
 
-EigenSolve::EigenSolve(std::shared_ptr<Container>& ct_in):ct(ct_in){
+EigenSolve::EigenSolve(std::shared_ptr<Container>& ct_in, Settings::Options& options_in):ct(ct_in), options(options_in){
  
   this->Solve();
 
@@ -10,11 +10,18 @@ EigenSolve::~EigenSolve(){};
 
 void EigenSolve::Solve(){
 
-//Loop over the entire space in x, y.
-//========================================
-								int COUNTER=0;
-				for(int i=0; i<constants::x_cell_capa; ++i){
-							for(int j=0; j<constants::y_cell_capa; ++j){
+	//Loop over the entire space in x, y.
+	//========================================
+	int COUNTER=0;
+
+	int max_i=constants::x_cell_capa;
+	int max_j=constants::y_cell_capa;
+	if(options.get_flag_TWODMAP_zx()){
+		max_i=constants::eta_cell_capa;
+		max_j=constants::x_cell_capa;
+	}
+	for(int i=0; i<max_i; ++i){
+							for(int j=0; j<max_j; ++j){
 
 								//Solve the eigenvalue problem for each Tmunu at each cell.
 								//======================================================

@@ -165,10 +165,15 @@ class Container{
 	public:
 
        Container(Settings::Options options_in):options(options_in),SumWeight(0.0), SumPair(0.0), SumTrig(0.0), CountEv(0), B00(0.0), meanNt(-1.0){
-std::cout << "Calling Container." << std::endl;
+	       std::cout << ":)Calling Container." << std::endl;
 	       if(constants::MODE.find("twopc")!=string::npos || constants::MODE.find("2dmap")!=string::npos){
 		       Hist2D = new double *[constants::x_cell_capa];
-		       Hist2DMultiComp = new MultiComp *[constants::x_cell_capa];
+		       //HERE
+		       if(!options.get_flag_TWODMAP_zx()){
+			       Hist2DMultiComp = new MultiComp *[constants::x_cell_capa];
+		       }else{
+			       Hist2DMultiComp = new MultiComp *[constants::eta_cell_capa];
+		       }
 		       Hist2D_x= new double *[constants::x_cell_capa];
 		       Hist2D_y= new double *[constants::x_cell_capa];
 		       Hist2DPartHit= new double *[constants::x_cell_capa];
@@ -180,36 +185,54 @@ std::cout << "Calling Container." << std::endl;
 		       }
 		       Final2DHist= new double *[constants::x_cell_capa];
 
-		       for(int i=0; i<constants::x_cell_capa; i++){
-			       Hist2D[i] = new double[constants::y_cell_capa];
-			       Hist2DMultiComp[i] = new MultiComp[constants::y_cell_capa];
-			       Hist2D_x[i]= new double[constants::y_cell_capa];
-			       Hist2D_y[i]= new double[constants::y_cell_capa];
-			       Hist2DPartHit[i]= new double[constants::y_cell_capa];
-			       if(options.get_flag_SB_CMS()){
-				       HistSub2D[i] = new double[constants::y_cell_capa];
-				       HistSub2D_x[i]= new double[constants::y_cell_capa];
-				       HistSub2D_y[i]= new double[constants::y_cell_capa];
-				       HistSub2DPartHit[i]= new double[constants::y_cell_capa];
-			       }
-			       Final2DHist[i]= new double[constants::y_cell_capa];
-		       }
-
-		       for(int i=0; i<constants::x_cell_capa; i++){
-			       for(int j=0; j<constants::y_cell_capa; j++){
-				       Hist2D[i][j]=0.0;
-				       Hist2DMultiComp[i][j].init_zero();
-				       Hist2D_x[i][j]=0.0;
-				       Hist2D_y[i][j]=0.0;
-				       Hist2DPartHit[i][j]=0.0;
+		       if(!options.get_flag_TWODMAP_zx()){
+			       for(int i=0; i<constants::x_cell_capa; i++){
+				       Hist2D[i] = new double[constants::y_cell_capa];
+				       Hist2DMultiComp[i] = new MultiComp[constants::y_cell_capa];
+				       Hist2D_x[i]= new double[constants::y_cell_capa];
+				       Hist2D_y[i]= new double[constants::y_cell_capa];
+				       Hist2DPartHit[i]= new double[constants::y_cell_capa];
 				       if(options.get_flag_SB_CMS()){
-					       HistSub2D[i][j]=0.0;
-					       HistSub2D_x[i][j]=0.0;
-					       HistSub2D_y[i][j]=0.0;
-					       HistSub2DPartHit[i][j]=0.0;
+					       HistSub2D[i] = new double[constants::y_cell_capa];
+					       HistSub2D_x[i]= new double[constants::y_cell_capa];
+					       HistSub2D_y[i]= new double[constants::y_cell_capa];
+					       HistSub2DPartHit[i]= new double[constants::y_cell_capa];
 				       }
-				       Final2DHist[i][j]=0.0;
+				       Final2DHist[i]= new double[constants::y_cell_capa];
 			       }
+		       }else{
+			       for(int i=0; i<constants::eta_cell_capa; i++){
+				       Hist2DMultiComp[i] = new MultiComp[constants::x_cell_capa];
+			       }
+		       }
+		       //HERE
+
+//HERE
+	       std::cout << ":) Initializing Container." << std::endl;
+		       if(!options.get_flag_TWODMAP_zx()){
+			       for(int i=0; i<constants::x_cell_capa; i++){
+				       for(int j=0; j<constants::y_cell_capa; j++){
+					       Hist2D[i][j]=0.0;
+					       Hist2DMultiComp[i][j].init_zero();
+					       Hist2D_x[i][j]=0.0;
+					       Hist2D_y[i][j]=0.0;
+					       Hist2DPartHit[i][j]=0.0;
+					       if(options.get_flag_SB_CMS()){
+						       HistSub2D[i][j]=0.0;
+						       HistSub2D_x[i][j]=0.0;
+						       HistSub2D_y[i][j]=0.0;
+						       HistSub2DPartHit[i][j]=0.0;
+					       }
+					       Final2DHist[i][j]=0.0;
+				       }
+			       }
+		       }else{
+			       for(int i=0; i<constants::eta_cell_capa; i++){
+				       for(int j=0; j<constants::x_cell_capa; j++){
+					       Hist2DMultiComp[i][j].init_zero();
+				       }
+			       }
+
 		       }
 
 	       }else if(constants::MODE.find("Rt_yield")!=string::npos){
@@ -251,20 +274,28 @@ std::cout << "Calling Container." << std::endl;
 	       std::cout << "Calling Deconstructore of Container." << std::endl;
 	       //Free each sub-array
 	       if(constants::MODE.find("twopc")!=string::npos || constants::MODE.find("2dmap")!=string::npos){
-		       for(int i = 0; i < constants::x_cell_capa; i++) {
-			       delete[] Hist2D[i];
-			       delete[] Hist2DMultiComp[i];
-			       delete[] Hist2D_x[i];
-			       delete[] Hist2D_y[i];
-			       delete[] Hist2DPartHit[i];
-			       if(options.get_flag_SB_CMS()){
-				       delete[] HistSub2D[i];
-				       delete[] HistSub2D_x[i];
-				       delete[] HistSub2D_y[i];
-				       delete[] HistSub2DPartHit[i];
+		       if(!options.get_flag_TWODMAP_zx()){
+			       for(int i = 0; i < constants::x_cell_capa; i++) {
+				       delete[] Hist2D[i];
+				       delete[] Hist2DMultiComp[i];
+				       delete[] Hist2D_x[i];
+				       delete[] Hist2D_y[i];
+				       delete[] Hist2DPartHit[i];
+				       if(options.get_flag_SB_CMS()){
+					       delete[] HistSub2D[i];
+					       delete[] HistSub2D_x[i];
+					       delete[] HistSub2D_y[i];
+					       delete[] HistSub2DPartHit[i];
+				       }
+				       delete[] Final2DHist[i];
 			       }
-			       delete[] Final2DHist[i];
+
+		       }else{
+			       for(int i = 0; i < constants::eta_cell_capa; i++) {
+				       delete[] Hist2DMultiComp[i];
+			       }
 		       }
+		       //HERE
 		       //Free the array of pointers
 		       delete[] Hist2D;
 		       delete[] Hist2DMultiComp;

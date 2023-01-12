@@ -6,20 +6,23 @@
 #include <vector>
 #include "Container.h" 
 #include "InfoHist.h" 
+#include "Settings.h" 
 
 class EMconv{
 
 
 public:
-EMconv(std::vector<Container::ParticleInfo> part_1ev_in, std::shared_ptr<Container>& ct_in);
+EMconv(std::vector<Container::ParticleInfo> part_1ev_in, std::shared_ptr<Container>& ct_in, Settings::Options& options_in);
 ~EMconv();
 
 private:
 std::vector<Container::ParticleInfo> part_1ev;
 std::shared_ptr<Container>& ct;
 std::shared_ptr<InfoHist> infohist;
+Settings::Options& options;
 double 	xy6sigma;
 double 	etas6sigma;
+bool Skip (int i, int j, int k) const;
 
 //TEMP
 //=====

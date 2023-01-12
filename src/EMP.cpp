@@ -27,12 +27,16 @@ EMP::EMP(Settings::Options options_in, LogSettings log_in):options(options_in), 
 
 		//Converting energy and momentum into EMtensor
 		//==============================================
-		auto emconv = std::make_shared<EMconv>(part_1ev, ct);
+		std::cout << "EMconv==>" << std::endl;
+		auto emconv = std::make_shared<EMconv>(part_1ev, ct, options);
+		std::cout << "<==EMconv" << std::endl;
 
 
 		//Under construction: Getting e from Tmunu.
 		//=========================================
-                auto Eigen = std::make_shared<EigenSolve>(ct);
+		std::cout << "EigenSolve==>" << std::endl;
+                auto Eigen = std::make_shared<EigenSolve>(ct, options);
+		std::cout << "<==EigenSolve" << std::endl;
 
 
 		//Write out in 2D format.
@@ -41,8 +45,8 @@ EMP::EMP(Settings::Options options_in, LogSettings log_in):options(options_in), 
 		//-----------------------------
 		std::string generated_directory_name=uf->get_output_directory(options.get_out_directory_name());
 		uf->make_output_directory(generated_directory_name);
-		auto write = std::make_shared<Write>(ms, options, info, uf);
-                write->write(generated_directory_name, ct); 
+		auto write = std::make_shared<Write>(ms, options, info, uf, ct);
+                write->write(generated_directory_name); 
 
 	}
 

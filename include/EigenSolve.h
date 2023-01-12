@@ -18,12 +18,13 @@ class EigenSolve{
 
   public:
 
-  EigenSolve(std::shared_ptr<Container>& ct_in);
+  EigenSolve(std::shared_ptr<Container>& ct_in, Settings::Options& options);
   ~EigenSolve();
 
 
   private:
   std::shared_ptr<Container>& ct;
+  Settings::Options& options;
   void Solve();
 
 

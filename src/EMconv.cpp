@@ -1,6 +1,6 @@
 #include "EMconv.h"
 
-EMconv::EMconv(std::vector<Container::ParticleInfo> part_1ev_in, std::shared_ptr<Container>& ct_in):part_1ev(part_1ev_in), ct(ct_in), tau(0.30), detas(0.5){//Here, tau is in fm
+EMconv::EMconv(std::vector<Container::ParticleInfo> part_1ev_in, std::shared_ptr<Container>& ct_in, Settings::Options& options_in):part_1ev(part_1ev_in), ct(ct_in), options(options_in), tau(0.30), detas(0.5){//Here, tau is in fm
 	infohist = std::make_shared<InfoHist>(constants::x_max, constants::y_max, constants::d_x, constants::d_y, 2.0);
 	xy6sigma=round(constants::transSmear*6.0/constants::dl);
 	etas6sigma=round(constants::longSmear*6.0/this->detas);
@@ -85,17 +85,23 @@ bool EMconv::Convert(){
 									//========================
 									//TODO: Obtain Tmunu in Milne
 									//ct->Hist2DMultiComp[i][j].tt+=invV*(part.e*part.e/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
-							if(k==int(constants::eta_cell_capa/2.0)){
-										ct->Hist2DMultiComp[i][j].tt+=invV*(part.e*part.e/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
-										ct->Hist2DMultiComp[i][j].tx+=invV*(part.e*part.px/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
-										ct->Hist2DMultiComp[i][j].ty+=invV*(part.e*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
-										ct->Hist2DMultiComp[i][j].tz+=invV*(part.e*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
-										ct->Hist2DMultiComp[i][j].xx+=invV*(part.px*part.px/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
-										ct->Hist2DMultiComp[i][j].xy+=invV*(part.px*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
-										ct->Hist2DMultiComp[i][j].xz+=invV*(part.px*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
-										ct->Hist2DMultiComp[i][j].yy+=invV*(part.py*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
-										ct->Hist2DMultiComp[i][j].yz+=invV*(part.py*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
-										ct->Hist2DMultiComp[i][j].zz+=invV*(part.pz*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+									if(!this->Skip(i,j,k)){
+										int i__=i;
+										int j__=j;
+										if(!options.get_flag_TWODMAP_zx() ){
+											i__ = k;
+											j__ = i;
+										}
+										ct->Hist2DMultiComp[i__][j__].tt+=invV*(part.e*part.e/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i__][j__].tx+=invV*(part.e*part.px/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i__][j__].ty+=invV*(part.e*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i__][j__].tz+=invV*(part.e*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i__][j__].xx+=invV*(part.px*part.px/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i__][j__].xy+=invV*(part.px*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i__][j__].xz+=invV*(part.px*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i__][j__].yy+=invV*(part.py*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i__][j__].yz+=invV*(part.py*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
+										ct->Hist2DMultiComp[i__][j__].zz+=invV*(part.pz*part.pz/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
 									}//only midy
 										//TODO: Obtain Tmunu in Milne
 										//GAUSS+=transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
@@ -116,6 +122,19 @@ if(fabs(GAUSS-1.0)>constants::SMALL){
 return true;
 }
 
+bool EMconv::Skip (int i, int j, int k) const{
+	if(!options.get_flag_TWODMAP_zx() ){
+		if(k==int(constants::eta_cell_capa/2.0))
+			return false;
+		else 
+			return true;
+	}else{
+		if(j==int(constants::y_cell_capa/2.0))
+			return false;
+		else 
+			return true;
+	}
+}
 
 
 int EMconv::test(){

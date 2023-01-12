@@ -47,5 +47,5 @@ fi
 # --vs_Multi 2 \
 
 ./EMP \
- -n $n -outdir ${outputdir} -dir ${DIR} -f ${EV} -ext ${EXT} \
- > ${log_dname}${log_fname}.log  2>&1  &
+ -n $n -outdir ${outputdir} -dir ${DIR} -f ${EV} -ext ${EXT} 
+ #> ${log_dname}${log_fname}.log  2>&1  &

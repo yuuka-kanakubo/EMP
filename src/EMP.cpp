@@ -8,7 +8,7 @@ EMP::EMP(Settings::Options options_in, LogSettings log_in):options(options_in), 
 	//Storing parton list for one event.
 	//=================================
 	auto readin = std::make_shared<ReadIn>(this->ms, this->options);
-	auto ct = std::make_shared<Container>(this->options.get_flag_SB_CMS());
+	auto ct = std::make_shared<Container>(this->options);
 	auto uf = std::make_shared<Util_func>(this->rndom);
 	auto info = std::make_shared<InfoHist>(constants::x_max, constants::y_max, constants::d_x, constants::d_y, 2.0);
 

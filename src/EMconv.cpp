@@ -85,7 +85,7 @@ bool EMconv::Convert(){
 									//========================
 									//TODO: Obtain Tmunu in Milne
 									//ct->Hist2DMultiComp[i][j].tt+=invV*(part.e*part.e/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->tau*this->detas;
-							if(k==84){
+							if(k==int(constants::eta_cell_capa/2.0)){
 										ct->Hist2DMultiComp[i][j].tt+=invV*(part.e*part.e/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
 										ct->Hist2DMultiComp[i][j].tx+=invV*(part.e*part.px/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;
 										ct->Hist2DMultiComp[i][j].ty+=invV*(part.e*part.py/part.e)*transFactor*longFactor*constants::dl*constants::dl*this->detas;

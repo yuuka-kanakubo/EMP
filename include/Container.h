@@ -2,6 +2,7 @@
 #define CONTAINER_H
 #include <iostream> 
 #include "Constants.h"
+#include "Settings.h"
 
 using std::string;
 using std::vector;
@@ -11,8 +12,7 @@ class Container{
  
    private:
 
-
-	   bool flag_SB_CMS;
+	   Settings::Options & options;
 
 	public:
 
@@ -164,7 +164,7 @@ class Container{
 
 	public:
 
-       Container(bool SB_CMS):flag_SB_CMS(SB_CMS),SumWeight(0.0), SumPair(0.0), SumTrig(0.0), CountEv(0), B00(0.0), meanNt(-1.0){
+       Container(Settings::Options options_in):options(options_in),SumWeight(0.0), SumPair(0.0), SumTrig(0.0), CountEv(0), B00(0.0), meanNt(-1.0){
 std::cout << "Calling Container." << std::endl;
 	       if(constants::MODE.find("twopc")!=string::npos || constants::MODE.find("2dmap")!=string::npos){
 		       Hist2D = new double *[constants::x_cell_capa];
@@ -172,7 +172,7 @@ std::cout << "Calling Container." << std::endl;
 		       Hist2D_x= new double *[constants::x_cell_capa];
 		       Hist2D_y= new double *[constants::x_cell_capa];
 		       Hist2DPartHit= new double *[constants::x_cell_capa];
-		       if(flag_SB_CMS){
+		       if(options.get_flag_SB_CMS()){
 			       HistSub2D = new double *[constants::x_cell_capa];
 			       HistSub2D_x= new double *[constants::x_cell_capa];
 			       HistSub2D_y= new double *[constants::x_cell_capa];
@@ -186,7 +186,7 @@ std::cout << "Calling Container." << std::endl;
 			       Hist2D_x[i]= new double[constants::y_cell_capa];
 			       Hist2D_y[i]= new double[constants::y_cell_capa];
 			       Hist2DPartHit[i]= new double[constants::y_cell_capa];
-			       if(flag_SB_CMS){
+			       if(options.get_flag_SB_CMS()){
 				       HistSub2D[i] = new double[constants::y_cell_capa];
 				       HistSub2D_x[i]= new double[constants::y_cell_capa];
 				       HistSub2D_y[i]= new double[constants::y_cell_capa];
@@ -202,7 +202,7 @@ std::cout << "Calling Container." << std::endl;
 				       Hist2D_x[i][j]=0.0;
 				       Hist2D_y[i][j]=0.0;
 				       Hist2DPartHit[i][j]=0.0;
-				       if(flag_SB_CMS){
+				       if(options.get_flag_SB_CMS()){
 					       HistSub2D[i][j]=0.0;
 					       HistSub2D_x[i][j]=0.0;
 					       HistSub2D_y[i][j]=0.0;
@@ -257,7 +257,7 @@ std::cout << "Calling Container." << std::endl;
 			       delete[] Hist2D_x[i];
 			       delete[] Hist2D_y[i];
 			       delete[] Hist2DPartHit[i];
-			       if(flag_SB_CMS){
+			       if(options.get_flag_SB_CMS()){
 				       delete[] HistSub2D[i];
 				       delete[] HistSub2D_x[i];
 				       delete[] HistSub2D_y[i];
@@ -271,7 +271,7 @@ std::cout << "Calling Container." << std::endl;
 		       delete[] Hist2D_x;
 		       delete[] Hist2D_y;
 		       delete[] Hist2DPartHit;
-		       if(flag_SB_CMS){
+		       if(options.get_flag_SB_CMS()){
 			       delete[] HistSub2D;
 			       delete[] HistSub2D_x;
 			       delete[] HistSub2D_y;

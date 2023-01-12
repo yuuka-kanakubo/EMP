@@ -11,8 +11,6 @@
 #include "Constants.h"
 #include "Message.h"
 #include "LogSettings.h"
-#include "EbyeInfo.h"
-#include "Util_func.h"
 
 using std::cout;
 using std::endl;
@@ -77,6 +75,7 @@ class Settings{
 				bool flag_pPb_cm_calculation;
 				bool flag_multiplicity_cut;
 				bool flag_vs_Multi;
+				bool flag_TWODMAP_zx;
 				bool zerofill;
 				bool two_subevent;
 				bool three_subevent;
@@ -166,6 +165,7 @@ class Settings{
 					cout << ":O mid-rapidity cut is automatically set to be -0.5<y_{cm}<0." << endl;
 				}
 				void set_flag_vs_Multi(const int i){this->flag_vs_Multi=true; this->collision_type=i;}
+				void set_flag_TWODMAP_zx(){this->flag_TWODMAP_zx=true;}
 				void set_modeTL(const int val){this->modeTL=val;}
 				void set_valTL(const std::string val){this->valTL=val;}
 				void set_at_xTL(const double val){this->at_xTL=val;}
@@ -246,6 +246,7 @@ class Settings{
 				int get_beginfile()const{return this->beginfile;}
 				bool get_flag_specify_startingfile()const{return this->specify_startingfile;}
 				bool get_flag_vs_Multi()const{return this->flag_vs_Multi;}
+				bool get_flag_TWODMAP_zx()const{return this->flag_TWODMAP_zx;}
 				int get_xaxis_type()const{return axis_type;};
 				bool get_hist_parton_level()const{return parton_level;};
 				bool get_hist_rapidity_shift()const{return rapidity_shift;};
@@ -410,6 +411,7 @@ class Settings{
 				else if(!strcmp(argv[i],"--parton")){options.set_parton_level_hist();}
 				else if(!strcmp(argv[i],"--nozeros")){options.set_flag_zerofill();}
 				else if(!strcmp(argv[i],"--vs_Multi")){options.set_flag_vs_Multi(atoi(argv[i+1]));}//Need to specify collision system in the case that centrality determination is required.
+				else if(!strcmp(argv[i],"--TWODMAP_zx")){options.set_flag_TWODMAP_zx();}
 				else if(!strcmp(argv[i],"--xaxis3_input")){options.set_axis3_input(argv[i+1]);}
 				//else if(!strcmp(argv[i],"--range")){options.set_xmax(atof(argv[i+1]));}///FOR x RANGE.
 				else if(!strcmp(argv[i],"--yshift")){options.dlty = atof(argv[i+1]); options.set_rapidity_shift_hist();} ///FOR rapidity shift.
@@ -497,49 +499,4 @@ void consistency_check(){
 };
 
 
-class eByeInSettings{
-
-
-	private:
-
-				ofstream ofs_eBye;
-
-	public:
-
-				//Functions for eBye info
-				//----------------------------
-				class eByeMulti{
-					public:
-						EbyeInfo ebye;
-						eByeMulti(Settings::Options option_in, const std::string inputpath, shared_ptr<Rndom>& rndom_in):rndom(rndom_in){
-							EbyeInfo ebye_;
-							this->get_EbyeInfo(option_in, inputpath, ebye_);
-							ebye=ebye_;
-						}
-					private:
-						shared_ptr<Rndom>& rndom;
-						void get_EbyeInfo(Settings::Options options, const std::string inputpath, EbyeInfo& ebye){
-							auto utl_ = make_shared<Util_func>(this->rndom);
-							double rap_shift=0.0;
-							if(options.get_hist_rapidity_shift() || options.get_flag_pPb_cm_calculation()){
-								rap_shift=(options.get_flag_pPb_cm_calculation())? constants::pPb_rap_shift_from_lab_to_cm:options.dlty;
-							}
-							utl_->get_EbyeInfo_(inputpath, ebye, rap_shift, options.get_flag_VZEROAND_trigger(), options.get_hist_parton_level(), options.get_collision_type());
-						}
-
-				};
-				void open_eBye_output(const std::string output){
-					std::string output_eBye=output+"/"+constants::fname_eByeInfo;
-					ofs_eBye.open(output_eBye.c_str());  
-				}
-				void print_eByeInfo(const int i, const eByeMulti Multi){
-					ofs_eBye << i << "  " << Multi.ebye.multiplicity << "  " << Multi.ebye.multiplicity_V0M << "  " << Multi.ebye.weight << endl;
-				}
-
-
-				eByeInSettings(){};
-				~eByeInSettings(){};
-
-
-};
 #endif

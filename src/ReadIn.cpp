@@ -1,8 +1,9 @@
-#include "ReadIn.h"
 #include <vector>
 #include <math.h>
 #include <sstream>
 #include <fstream>
+#include <iomanip>
+#include "ReadIn.h"
 
 int ReadIn::test(){
 

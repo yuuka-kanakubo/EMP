@@ -72,7 +72,7 @@ FourVector EnergyMomentumTensor::landau_frame_4velocity() const {
 	  //  " 0th eigenvalue is the largest one. It seems to be always fulfilled "
 	  // "in practice, but not guaranteed by Eigen. Here is Tmn * gmn, ",
 	  //   A, " for which it is not fulfilled. Please let Dima(oliiny) know.");
-	  if(fabs(eig_re(i_maxeigenvalue))>constants::SMALL){
+	  if(fabs(eig_re(i_maxeigenvalue))>constants::DECENT){
 		  std::cout << "SOMETHING IS WRONG " <<__FILE__ << "  " << __LINE__ << std::endl;
 		  std::cout << " i_maxeigenvalue is not 0. eigen_re :" << eig_re << std::endl;
 		  exit(1);

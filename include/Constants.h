@@ -60,7 +60,7 @@ inline const double TL_dtau2=0.3/hbarc;
 inline const std::string ext_nameTLxy="hydro_profiles_eta_at0__tau_";
 inline const std::string ext_nameTLxeta="hydro_profiles_y_at0__tau_";
 inline const double transSmear = 0.50;//fm
-inline const double longSmear = 0.50;
+inline const double longSmear = 0.005;
 
 
 #ifdef DNDETA_PROTON
@@ -340,10 +340,10 @@ inline const double longSmear = 0.50;
 #elif defined TWODMAP
 	const std::string MODE = "2dmap";
 	const string default_out_directory_name="output";
-	const double x_max = 10.0;//Not used
-	const double x_min = -10.0;//Not used
+	const double x_max = 0.1;//Not used
+	const double x_min = -0.1;//Not used
 	const double x_max_HI = 1.0;//Not used
-	const double d_x = 0.5;//Not used 
+	const double d_x = 0.005;//Not used 
 	const double d_x_HI = 0.5;//Not used 
 	const double y_max = 10.0;//Not used
 	const double y_min = -10.0;//Not used
@@ -352,10 +352,10 @@ inline const double longSmear = 0.50;
 	const double d_y_HI = 0.5;//Not used 
 	const int x_cell_capa=121;
 	const int y_cell_capa=121;
-	const int eta_cell_capa=169;
+	const int eta_cell_capa=1169;
 	const string default_ext="/hadronised.txt";
 const double dl = 0.3;//fm
-const double dleta = 0.15;
+const double dleta = 0.001;
 
 #else
 	const std::string MODE = "default";
@@ -412,7 +412,7 @@ inline	const double default_midy_pm = 0.5;
 inline	const double LARGE=1.0e+16;
 inline	const double DECENT=1.0;
 inline	const int LARGEint=10000;
-inline	const double SMALL=1.0e-5;
+inline	const double SMALL=1.0e-2;
 inline	const double TINY=1.0e-16;
 inline	const double multip_cut_more_than=-LARGE;
 inline	const double multip_cut_less_than=LARGE;

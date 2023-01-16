@@ -14,7 +14,6 @@ private:
 		std::shared_ptr<InfoHist>& infohist;
 		std::shared_ptr<Util_func>& uf;
 		std::shared_ptr<Container>& ct;
-double detas;
 
 		double get_xcoordinate(int i){
 			double x_coord = (i-(constants::x_cell_capa-1)/2)*constants::dl;//[fm]
@@ -27,7 +26,7 @@ double detas;
 		}
 
 		double get_etacoordinate(int k){
-			double eta_coord = (k-(constants::eta_cell_capa-1)/2)*this->detas;
+			double eta_coord = (k-(constants::eta_cell_capa-1)/2)*constants::dleta;
 			return eta_coord;
 		}
 

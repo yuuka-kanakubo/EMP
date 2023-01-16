@@ -20,7 +20,7 @@
 using namespace std;
 
 
-Write::Write(shared_ptr<Message> ms_in, Settings::Options options_in, shared_ptr<InfoHist> infohist_in, shared_ptr<Util_func> uf_in, shared_ptr<Container> ct_in):ms(ms_in), options(options_in), infohist(infohist_in), uf(uf_in), ct(ct_in),detas(0.5){};
+Write::Write(shared_ptr<Message> ms_in, Settings::Options options_in, shared_ptr<InfoHist> infohist_in, shared_ptr<Util_func> uf_in, shared_ptr<Container> ct_in):ms(ms_in), options(options_in), infohist(infohist_in), uf(uf_in), ct(ct_in){};
 Write::~Write(){};
 
 
@@ -35,11 +35,12 @@ Write::~Write(){};
 
 
 bool Write::write(const std::string& fname){
-	cout <<"write" << endl;
 	ct->max_nx+=constants::margin;
 	if(!options.get_flag_TWODMAP_zx()){
+		cout <<"write xy" << endl;
 		return this->write_xymap(fname);
 	}else{
+		cout <<"write zx" << endl;
 		return this->write_zxmap(fname);
 	}
 

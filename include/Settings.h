@@ -338,6 +338,8 @@ class Settings{
 					print_dndmt(false),
 					flag_pPb_cm_calculation(false),
 					flag_multiplicity_cut(false),
+					flag_vs_Multi(false),
+					flag_TWODMAP_zx(false),
 					zerofill(true),
 					two_subevent(false),
 					three_subevent(false),
@@ -453,7 +455,6 @@ class Settings{
 		}
 
 void consistency_check(){
-
 	if(constants::MODE.find("twopcInteg")!=string::npos || constants::MODE.find("twopc1D")!=std::string::npos){
 		if(!options.get_flag__2PCfull() && !options.get_flag__2PCnearside() && !options.get_flag__2PCout()) {
 			cout << ":( ERROR. Option --2PCfull, --2PCnearside, or --2PCout is needed. " << endl;

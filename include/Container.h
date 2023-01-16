@@ -170,8 +170,10 @@ class Container{
 		       Hist2D = new double *[constants::x_cell_capa];
 		       //HERE
 		       if(!options.get_flag_TWODMAP_zx()){
+	                       std::cout << ":)  options.get_flag_TWODMAP_zx() = false " << std::endl;
 			       Hist2DMultiComp = new MultiComp *[constants::x_cell_capa];
 		       }else{
+	                       std::cout << ":)  options.get_flag_TWODMAP_zx() = true " << std::endl;
 			       Hist2DMultiComp = new MultiComp *[constants::eta_cell_capa];
 		       }
 		       Hist2D_x= new double *[constants::x_cell_capa];

@@ -2,8 +2,8 @@
 
 DIR="/n/work02/yukanaku/pythia8244/dynamical_fragmentation/data/EKRT_0_5_A_SAT_MC"
 EV="ev"
-EXT="Readable_initial.txt"
-outputdir="EKRT_0_5_A_SAT_MC_zx"
+EXT="Readable_initialBeforeFS.txt"
+outputdir="EKRT_0_5_A_SAT_MC_BeforeFS_inZX"
 n=1
 
 
@@ -45,7 +45,9 @@ fi
 # --setNcoeff 3 \
 # --only_corona_associates \
 # --vs_Multi 2 \
+# --TWODMAP_zx \
 
 ./EMP \
- -n $n -outdir ${outputdir} -dir ${DIR} -f ${EV} -ext ${EXT}   --TWODMAP_zx
- #> ${log_dname}${log_fname}.log  2>&1  &
+ -n $n -outdir ${outputdir} -dir ${DIR} -f ${EV} -ext ${EXT}  \
+ --TWODMAP_zx \
+ > ${log_dname}${log_fname}.log  2>&1  &

@@ -24,10 +24,6 @@ double 	xy6sigma;
 double 	etas6sigma;
 bool Skip (int i, int j, int k) const;
 
-//TEMP
-//=====
-double tau;
-double detas;
 
 bool Convert();
 int test();
@@ -45,7 +41,7 @@ int test();
 		}
 
 		double get_etacoordinate(int k){
-			double eta_coord = (k-(constants::eta_cell_capa-1)/2)*this->detas;
+			double eta_coord = (k-(constants::eta_cell_capa-1)/2)*constants::dleta;
 			return eta_coord;
 		}
 
@@ -60,7 +56,7 @@ int test();
 		}
 
 		int get_etacell(double eta){
-			int etacell = int ((eta/this->detas)+(constants::eta_cell_capa/2.0));
+			int etacell = int ((eta/constants::dleta)+(constants::eta_cell_capa/2.0));
 			return etacell;
 		}
 
@@ -70,8 +66,8 @@ int get_etamin(const int etacenter_i){
 	int SmearRangeNetas= etas6sigma; 
 	int etamin = etacenter_i - SmearRangeNetas;
 	if(etacenter_i<SmearRangeNetas){
-                std::cout << ":( Energy is leaking out from the prepared space... " << __FILE__ << " " << __LINE__ << std::endl;
-                return -1;
+                std::cout << ":( Energy is leaking out from the prepared space... etamin " << etamin << "  " << __FILE__ << " " << __LINE__ << std::endl;
+                return etamin;
 	}
 return etamin;
 }
@@ -80,8 +76,8 @@ int get_etamax(const int etacenter_i){
 					int SmearRangeNetas= etas6sigma; 
 					int etamax = etacenter_i + SmearRangeNetas;
 					if(etacenter_i>(constants::eta_cell_capa-SmearRangeNetas)){
-						std::cout << ":( Energy is leaking out from the prepared space... " << __FILE__ << " " << __LINE__ << std::endl;
-						return -1;
+                std::cout << ":( Energy is leaking out from the prepared space... etamax " << etamax << "  " << __FILE__ << " " << __LINE__ << std::endl;
+						return etamax;
 					}
 return etamax;
 }
@@ -92,7 +88,7 @@ int get_xmin(const int xcenter_i){
 						int xmin = xcenter_i - SmearRangeNxy;
 						if(xcenter_i<SmearRangeNxy){
 							std::cout << ":( Energy is leaking out from the prepared space... " << __FILE__ << " " << __LINE__ << std::endl;
-							return -1;
+							return xmin;
 						}
 return xmin;
 }
@@ -102,7 +98,7 @@ int get_xmax(const int xcenter_i){
 						int xmax = xcenter_i + SmearRangeNxy;
 						if(xcenter_i>(constants::x_cell_capa-SmearRangeNxy)){
 							std::cout << ":( Energy is leaking out from the prepared space... " << __FILE__ << " " << __LINE__ << std::endl;
-							return -1;
+							return xmax;
 						}
 return xmax;
 }
@@ -112,7 +108,7 @@ int get_ymin(const int ycenter_i){
 						int ymin = ycenter_i - SmearRangeNxy;
 						if(ycenter_i<SmearRangeNxy){
 							std::cout << ":( Energy is leaking out from the prepared space... " << __FILE__ << " " << __LINE__ << std::endl;
-							return -1;
+							return ymin;
 						}
 return ymin;
 }
@@ -122,7 +118,7 @@ int get_ymax(const int ycenter_i){
 						int ymax = ycenter_i + SmearRangeNxy;
 						if(ycenter_i>(constants::y_cell_capa-SmearRangeNxy)){
 							std::cout << ":( Energy is leaking out from the prepared space... " << __FILE__ << " " << __LINE__ << std::endl;
-							return -1;
+							return ymax;
 						}
 return ymax;
 }

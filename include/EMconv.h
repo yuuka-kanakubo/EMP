@@ -66,7 +66,7 @@ int get_etamin(const int etacenter_i){
 	int SmearRangeNetas= etas6sigma; 
 	int etamin = etacenter_i - SmearRangeNetas;
 	if(etacenter_i<SmearRangeNetas){
-                std::cout << ":( Energy is leaking out from the prepared space... etamin " << etamin << "  " << __FILE__ << " " << __LINE__ << std::endl;
+                if(options.get_flag_TWODMAP_zx()) std::cout << ":( Energy is leaking out from the prepared space... etamin " << etamin << "  " << __FILE__ << " " << __LINE__ << std::endl;
                 return etamin;
 	}
 return etamin;
@@ -76,7 +76,7 @@ int get_etamax(const int etacenter_i){
 					int SmearRangeNetas= etas6sigma; 
 					int etamax = etacenter_i + SmearRangeNetas;
 					if(etacenter_i>(constants::eta_cell_capa-SmearRangeNetas)){
-                std::cout << ":( Energy is leaking out from the prepared space... etamax " << etamax << "  " << __FILE__ << " " << __LINE__ << std::endl;
+						if(options.get_flag_TWODMAP_zx()) std::cout << ":( Energy is leaking out from the prepared space... etamax " << etamax << "  " << __FILE__ << " " << __LINE__ << std::endl;
 						return etamax;
 					}
 return etamax;

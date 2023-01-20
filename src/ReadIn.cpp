@@ -28,7 +28,10 @@ bool ReadIn::read(const int i, std::vector<Container::ParticleInfo> &part_1ev){
 
 			std::ifstream in;
 			in.open(inputpath.c_str(),std::ios::in);
-			if(!in){ ms->open(inputpath); return false;}
+			if(!in){ 
+				ms->open(inputpath); 
+				return false;
+			}
 
 
 			{

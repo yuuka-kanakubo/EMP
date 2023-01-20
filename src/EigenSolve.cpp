@@ -40,20 +40,44 @@ void EigenSolve::Solve(){
 										this->ct->Hist2DMultiComp[i][j].zz
 										});
 								const FourVector u = T.landau_frame_4velocity();
+								double e_COLLIDER = T.GetEigenVal();
+
+								//Get PL = T_mu nu l^nu l^mu
+								//=======================
+								double P_L = this->Tmunu_lmulnu(u, T);
+								double P_T = 0.50*(3.*this->Tmunu_Deltamunu(e_COLLIDER, T)-P_L); 
+								double P = -(1.0/3.)*this->Tmunu_Deltamunu(e_COLLIDER, T); 
+								double Pizz = PiMunu(9, u, T, e_COLLIDER);
 
 								EnergyMomentumTensor TL = T.boosted(u);
 
 
 								//Sanity check
 								//===============
+								const FourVector u__DUMMY = TL.landau_frame_4velocity();
+								double e_LOCALRST = TL.GetEigenVal();
+								double PizzLOCAL = PiMunu(9, u__DUMMY, TL, e_LOCALRST);
 								if(COUNTER < 5 && this->ct->Hist2DMultiComp[i][j].tt>constants::DECENT){
-									double e_COLLIDER = T.GetEigenVal();
 
-									const FourVector u__DUMMY = TL.landau_frame_4velocity();
-									double e_LOCALRST = TL.GetEigenVal();
+									double P_LOCALRST = -(1.0/3.)*this->Tmunu_Deltamunu(e_LOCALRST, TL); 
+
+									//Here I am checking if u given by energymomentumtensor.cc 
+									//is actually covariant  vector, i.e. u_mu, or not.
+									//In double uTu, I am explicitly expressing th
+									//===========================================================================================================
+									double uTu = T[0]*u[0]*u[0] 
+										+ 2.*T[1]*u[0]*u[1] + 2.*T[2]*u[0]*u[2] + 2.*T[3]*u[0]*u[3]
+										+ 2.*T[5]*u[1]*u[2] + 2.*T[6]*u[1]*u[3] + 2.*T[8]*u[2]*u[3] 
+										+ T[4]*u[1]*u[1] 
+										+ T[7]*u[2]*u[2] 
+										+ T[9]*u[3]*u[3];
 
 									std::cout << "e_COLLIDER: " << e_COLLIDER << ",  umu : " << u << std::endl;
 									std::cout << "e_LOCALRST: " << e_LOCALRST << ",  umu : " << u__DUMMY << std::endl;
+									std::cout << "uTu       : " << uTu << std::endl;
+									std::cout << "P_COLLIDER    : " << P << std::endl;
+									std::cout << "P_LOCALRST    : " << P_LOCALRST << std::endl;
+									std::cout << "P_L, P_T: " << P_L << ",  " << P_T << std::endl;
 									std::cout << std::endl;
 									COUNTER++;
 								}
@@ -61,11 +85,18 @@ void EigenSolve::Solve(){
 								//std::cout << "Eigen vec u " << u << std::endl; 
 								//Archiving solutions (e, umu...) in Container.
 								//==========================================
-								this->ct->Hist2DMultiComp[i][j].eLOCAL = TL[0];
-								this->ct->Hist2DMultiComp[i][j].PxLOCAL = TL[4];
-								this->ct->Hist2DMultiComp[i][j].pixyLOCAL = TL[5];
-								this->ct->Hist2DMultiComp[i][j].PyLOCAL = TL[7];
-								this->ct->Hist2DMultiComp[i][j].PzLOCAL = TL[9];
+								this->ct->Hist2DMultiComp[i][j].ttLOCAL = TL[0];
+								this->ct->Hist2DMultiComp[i][j].xxLOCAL = TL[4];
+								this->ct->Hist2DMultiComp[i][j].xyLOCAL = TL[5];
+								this->ct->Hist2DMultiComp[i][j].yyLOCAL = TL[7];
+								this->ct->Hist2DMultiComp[i][j].zzLOCAL = TL[9];
+								this->ct->Hist2DMultiComp[i][j].P = P;
+								this->ct->Hist2DMultiComp[i][j].e = e_COLLIDER;
+								this->ct->Hist2DMultiComp[i][j].zzLOCAL=TL[9];
+								this->ct->Hist2DMultiComp[i][j].P_T = P_T;
+								this->ct->Hist2DMultiComp[i][j].P_L = P_L;
+								this->ct->Hist2DMultiComp[i][j].pizzLOCAL = PizzLOCAL;
+								this->ct->Hist2DMultiComp[i][j].pizz = Pizz;
 
 							}
 				}

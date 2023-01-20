@@ -53,8 +53,8 @@ bool Write::write_xymap(const std::string& fname){
 	ofs.open((fname+"/"+constants::default_out_fname).c_str());
 	if(!ofs){ms->open(fname+"/"+constants::default_out_fname); return false;}
 
-ofs << "# x, y,  tt, tx, ty, tz, xx, xy, xz, yy, yz, zz,  eLOCAL, Px, Py, Pz, pixy" << std::endl;
-ofs << "#       <======================================>  <=======================>" << std::endl;
+ofs << "# x, y,  tt, tx, ty, tz, xx, xy, xz, yy, yz, zz,  eLOCAL, Px, Py, Pz, pixy, P_L, P_T" << std::endl;
+ofs << "#       <======================================>  <=================================>" << std::endl;
 ofs << "#             Tmunu components before boost,        at LOCAL " << std::endl;
 for(int i=0; i<constants::x_cell_capa; ++i){
 	for(int j=0; j<constants::y_cell_capa; ++j){
@@ -79,11 +79,17 @@ for(int i=0; i<constants::x_cell_capa; ++i){
 			<< setw(16) << ct->Hist2DMultiComp[i][j].yy << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].yz << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].zz << "    " 
-			<< setw(16) << ct->Hist2DMultiComp[i][j].eLOCAL << "  " 
-			<< setw(16) << ct->Hist2DMultiComp[i][j].PxLOCAL << "  " 
-			<< setw(16) << ct->Hist2DMultiComp[i][j].PyLOCAL << "  " 
-			<< setw(16) << ct->Hist2DMultiComp[i][j].PzLOCAL << "  " 
-			<< setw(16) << ct->Hist2DMultiComp[i][j].pixyLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].pizz << "    " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].ttLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].xxLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].yyLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].zzLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].xyLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].e << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].P << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].P_L << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].P_T << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].pizzLOCAL << "  " 
 			<< endl;
 	}
 	ofs << endl;
@@ -100,8 +106,8 @@ bool Write::write_zxmap(const std::string& fname){
 	if(!ofs){ms->open(fname+"/"+constants::default_out_fname); return false;}
 
 
-ofs << "# z, x,  tt, tx, ty, tz, xx, xy, xz, yy, yz, zz,  eLOCAL, Px, Py, Pz, pixy" << std::endl;
-ofs << "#       <======================================>  <=======================>" << std::endl;
+ofs << "# z, x,  tt, tx, ty, tz, xx, xy, xz, yy, yz, zz,  eLOCAL, Px, Py, Pz, pixy, P_L, P_T" << std::endl;
+ofs << "#       <======================================>  <================================>" << std::endl;
 ofs << "#             Tmunu components before boost,        at LOCAL " << std::endl;
 for(int i=0; i<constants::eta_cell_capa; ++i){
 	for(int j=0; j<constants::x_cell_capa; ++j){
@@ -126,11 +132,17 @@ for(int i=0; i<constants::eta_cell_capa; ++i){
 			<< setw(16) << ct->Hist2DMultiComp[i][j].yy << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].yz << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].zz << "    " 
-			<< setw(16) << ct->Hist2DMultiComp[i][j].eLOCAL << "  " 
-			<< setw(16) << ct->Hist2DMultiComp[i][j].PxLOCAL << "  " 
-			<< setw(16) << ct->Hist2DMultiComp[i][j].PyLOCAL << "  " 
-			<< setw(16) << ct->Hist2DMultiComp[i][j].PzLOCAL << "  " 
-			<< setw(16) << ct->Hist2DMultiComp[i][j].pixyLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].pizz << "    " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].ttLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].xxLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].yyLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].zzLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].xyLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].e << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].P << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].P_L << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].P_T << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].pizzLOCAL << "  " 
 			<< endl;
 	}
 	ofs << endl;

@@ -42,6 +42,11 @@ class Message{
       cout << "ERROR :(  unable to open file. " << fname << endl;
   }
 
+  const void readFail(){
+	  cout << "TERMINATING:( " << std::endl;
+	  exit(1);
+}
+
   const void finish(){
     cout << "Done :) " << endl;
   };
@@ -49,6 +54,7 @@ class Message{
   const void TestMode(){
     cout << "MODE: " << constants::MODE << endl;
  }
+
 
 
   const void WARNING_LARGE_IMAGINARYPART(const double IMG){

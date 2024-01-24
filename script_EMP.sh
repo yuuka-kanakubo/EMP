@@ -1,9 +1,9 @@
 #!/bin/sh
 
-DIR="/n/work02/yukanaku/pythia8244/dynamical_fragmentation/data/EKRT_0_5_A_SAT_MC"
+DIR="/n/work02/yukanaku/mcaa-master/data/16Jan2024_test/60_70/ev000000000"
 EV="ev"
-EXT="Readable_initial.txt"
-outputdir="EKRT_0_5_A_SAT_MC_inXY"
+EXT="EKRTminijet.txt"
+outputdir="TestBeforePropagation"
 n=1
 
 
@@ -28,25 +28,6 @@ fi
 #-------------------------
 
 
-#Options.
-#--------------
-# --CentralityCut 9 \
-# --CentralityCut_ext hadronFinal_corecorona_weakStop.txt \
-# --HI \
-# --only_corona \
-# --INEL_lg_0 \
-# --twosub  \
-# --threesub  \
-# --4particle \
-# --tagged \
-# --2PCfull \
-# --2PCnearside \
-# --2PCout \
-# --setNcoeff 3 \
-# --only_corona_associates \
-# --vs_Multi 2 \
-# --TWODMAP_zx \
-
 ./EMP \
  -n $n -outdir ${outputdir} -dir ${DIR} -f ${EV} -ext ${EXT}  \
-> ${log_dname}${log_fname}.log  2>&1  &
+##> ${log_dname}${log_fname}.log  2>&1  &

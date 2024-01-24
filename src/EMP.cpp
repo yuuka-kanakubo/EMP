@@ -22,7 +22,7 @@ EMP::EMP(Settings::Options options_in, LogSettings log_in):options(options_in), 
 	for(int i=options.get_beginfile(); i<options.get_nfile(); ++i){
 		if(!(i%this->PrintCounter)) ms->read(i);
 		std::vector<Container::ParticleInfo> part_1ev;
-		if(!readin->read(i, part_1ev)) {ms->readFail();};
+		if(!readin->readEKRT(i, part_1ev)) {ms->readFail();};
 		readin->show_readin(part_1ev, false);
 
 		//Converting energy and momentum into EMtensor

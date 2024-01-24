@@ -51,6 +51,7 @@ ReadIn(shared_ptr<Message> ms_in, Settings::Options options_in);
 ~ReadIn(){};
 
 bool read(const int i, std::vector<Container::ParticleInfo> &part_1ev);
+bool readEKRT(const int i, std::vector<Container::ParticleInfo> &part_1ev);
 bool show_readin(std::vector<Container::ParticleInfo> part_1ev, const bool ALL){
 
 std::cout << "Showing readin data " << std::endl;

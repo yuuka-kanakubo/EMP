@@ -61,6 +61,7 @@ inline const std::string ext_nameTLxy="hydro_profiles_eta_at0__tau_";
 inline const std::string ext_nameTLxeta="hydro_profiles_y_at0__tau_";
 inline const double transSmear = 0.50;//fm
 inline const double longSmear = 0.005;
+inline const double tau0 = 0.2;//fm
 
 
 #ifdef DNDETA_PROTON

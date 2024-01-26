@@ -25,6 +25,11 @@ EMP::EMP(Settings::Options options_in, LogSettings log_in):options(options_in), 
 		if(!readin->readEKRT(i, part_1ev)) {ms->readFail();};
 		readin->show_readin(part_1ev, false);
 
+		//Propagating minijets.
+		//====================
+		if(options.get_minijet_freestream())
+			auto step = std::make_shared<MiniJetStep>(part_1ev);
+
 		//Converting energy and momentum into EMtensor
 		//==============================================
 		std::cout << "EMconv==>" << std::endl;

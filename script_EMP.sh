@@ -1,9 +1,9 @@
 #!/bin/sh
 
-DIR="/n/work02/yukanaku/mcaa-master/data/16Jan2024_test/60_70/ev000000000"
+DIR="/n/work02/yukanaku/mcaa-master/data/16Jan2024_test/60_70"
 EV="ev"
 EXT="EKRTminijet.txt"
-outputdir="TestBeforePropagation"
+outputdir="TestAfterPropagation"
 n=1
 
 
@@ -30,4 +30,5 @@ fi
 
 ./EMP \
  -n $n -outdir ${outputdir} -dir ${DIR} -f ${EV} -ext ${EXT}  \
+ --fs \
 ##> ${log_dname}${log_fname}.log  2>&1  &

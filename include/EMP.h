@@ -9,6 +9,7 @@
 #include "LogSettings.h"
 #include "InfoHist.h"
 #include "EigenSolve.h"
+#include "MiniJetStep.h"
 #include "energymomentumtensor.h"
 
 class EMP{

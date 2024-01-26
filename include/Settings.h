@@ -57,6 +57,7 @@ class Settings{
 				bool Specify_f_for_CentralityCut;
 				bool Specify_ext_for_CentralityCut;
 				bool parton_level;
+				bool minijet_freestream;
 				bool rapidity_shift;
 				bool high_pt_mode;
 				bool cut_INEL_lg_0;
@@ -136,6 +137,7 @@ class Settings{
 				void set_out_directory_name(std::string name){this->out_directory_name=name;}
 
 				void set_parton_level_hist(){parton_level=true;};
+				void set_minijet_freestream(){minijet_freestream=true;};
 				void set_rapidity_shift_hist(){rapidity_shift=true;};
 				void set_flag_high_pt_mode(){high_pt_mode=true; cout << ":o HIGH PT MODE is called. Currently PP7TeV events are assumed. Please change a settings if you are analyzing different energy or system." << endl;};
 				void set_flag_zerofill(){zerofill=true;};
@@ -249,6 +251,7 @@ class Settings{
 				bool get_flag_TWODMAP_zx()const{return this->flag_TWODMAP_zx;}
 				int get_xaxis_type()const{return axis_type;};
 				bool get_hist_parton_level()const{return parton_level;};
+				bool get_minijet_freestream()const{return minijet_freestream;};
 				bool get_hist_rapidity_shift()const{return rapidity_shift;};
 				bool get_flag_high_pt_mode()const{return high_pt_mode;};
 				bool get_flag_zerofill()const{return zerofill;};
@@ -321,6 +324,7 @@ class Settings{
 					Specify_f_for_CentralityCut(false),
 					Specify_ext_for_CentralityCut(false),
 					parton_level(false),
+					minijet_freestream(false),
 					rapidity_shift(false),
 					high_pt_mode(false),
 					cut_INEL_lg_0(false),
@@ -411,6 +415,7 @@ class Settings{
 				else if(!strcmp(argv[i],"--pPb_cm")){options.set_flag_pPb_cm_calculation();}
 				else if(!strcmp(argv[i],"--long_range_cut_type")){options.set_mid_rapidity_cut_type(atoi(argv[i+1]));}//0 or 1
 				else if(!strcmp(argv[i],"--parton")){options.set_parton_level_hist();}
+				else if(!strcmp(argv[i],"--fs")){options.set_minijet_freestream();}
 				else if(!strcmp(argv[i],"--nozeros")){options.set_flag_zerofill();}
 				else if(!strcmp(argv[i],"--vs_Multi")){options.set_flag_vs_Multi(atoi(argv[i+1]));}//Need to specify collision system in the case that centrality determination is required.
 				else if(!strcmp(argv[i],"--TWODMAP_zx")){options.set_flag_TWODMAP_zx();}
@@ -451,6 +456,7 @@ class Settings{
 					cout << "ERROR:( There is no such an option: " << opt_in << endl; 
 					exit(1);
 				}
+				i++;
 			}
 		}
 

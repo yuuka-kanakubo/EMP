@@ -29,6 +29,7 @@ EMP::EMP(Settings::Options options_in, LogSettings log_in):options(options_in), 
 		//====================
 		if(options.get_minijet_freestream())
 			auto step = std::make_shared<MiniJetStep>(part_1ev);
+		readin->show_readin(part_1ev, false);
 
 		//Converting energy and momentum into EMtensor
 		//==============================================

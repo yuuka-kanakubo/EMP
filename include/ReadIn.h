@@ -60,6 +60,8 @@ for(const auto& elem: part_1ev){
 count++;
 std::cout << elem.id << "  "
 	<< elem.e << "  "
+	<< elem.rap << "  "
+	<< elem.pt << "  "
 	<< elem.px << "  "
 	<< elem.py << "  "
 	<< elem.pz << "  "

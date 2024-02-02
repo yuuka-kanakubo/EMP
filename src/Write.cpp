@@ -106,8 +106,8 @@ bool Write::write_zxmap(const std::string& fname){
 	if(!ofs){ms->open(fname+"/"+constants::default_out_fname); return false;}
 
 
-ofs << "# z, x,  tt, tx, ty, tz, xx, xy, xz, yy, yz, zz,  eLOCAL, Px, Py, Pz, pixy, P_L, P_T" << std::endl;
-ofs << "#       <======================================>  <================================>" << std::endl;
+ofs << "# z, x,  tt, tx, ty, tz, xx, xy, xz, yy, yz, zz, pizz,   ttLOCAL, xxLOCAL, yyLOCAL, zzLOCAL, xyLOCAL, e, P, P_L, P_T" << std::endl;
+ofs << "#       <=============================================>  <================================>" << std::endl;
 ofs << "#             Tmunu components before boost,        at LOCAL " << std::endl;
 for(int i=0; i<constants::eta_cell_capa; ++i){
 	for(int j=0; j<constants::x_cell_capa; ++j){

@@ -105,8 +105,11 @@ bool ReadIn::readEKRT(const int i, std::vector<Container::ParticleInfo> &part_1e
 				part_in.py=part_in.pt*sin(part_in.phi);
 				part_in.pz=part_in.mt*sinh(part_in.rap);
 				part_in.e=part_in.mt*cosh(part_in.rap);
-				part_in.tau=part_in.t/cosh(part_in.rap);
-				part_in.z=part_in.tau*sinh(part_in.rap);
+				//part_in.tau=part_in.t/cosh(part_in.rap);
+				//part_in.z=part_in.tau*sinh(part_in.rap);
+				part_in.tau=0.0;
+				part_in.z=0.0;
+				part_in.t=0.0;
 				double msq=pow(part_in.e,2)
 					-pow(part_in.px,2)
 					-pow(part_in.py,2)

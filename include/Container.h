@@ -33,6 +33,9 @@ class Container{
 			double y;
 			double z;
 			double t;
+			double deltaz;
+			double Bjx1;//mother parton x
+			double Bjx2;//mother parton x
 			double tau;
 			double r;
 			double rap;

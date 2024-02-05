@@ -69,6 +69,9 @@ std::cout << elem.id << "  "
 	<< elem.y << "  "
 	<< elem.z << "  "
 	<< elem.t << "  "
+	<< elem.Bjx1 << "  "
+	<< elem.Bjx2 << "  "
+	<< elem.deltaz << "  "
 	<< std::endl;
 if(!ALL && count>10) break;
 }

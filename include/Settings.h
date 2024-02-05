@@ -93,6 +93,8 @@ class Settings{
 				unsigned int collision_type;
 				double long_range_hist_pm;
 				double multip_cut_more_than;
+				double sqrt_s;
+				int seed;
 				double multip_cut_less_than;
                                 int modeTL;//0:xy, 1:xeta
                                 std::string valTL;
@@ -160,6 +162,8 @@ class Settings{
 					multip_cut_less_than=multip_cut_less_than_in;
 				};
 				void set_longrange_of_hist__plus_minus(const double dy){long_range_hist_pm=dy;};
+				void set_sqrt_s(const double val){sqrt_s=val;};
+				void set_seed(const int val){seed=val;};
 				void set_mid_rapidity_cut_type(const int cut_type){mid_rapidity_cut_type=cut_type;};
 				void set_flag_pPb_cm_calculation(){
 					flag_pPb_cm_calculation=true;
@@ -264,6 +268,8 @@ class Settings{
 				double get_pPb_mid_rapidity__fwd()const{return constants::pPb_mid_rapidity__fwd;}
 				bool get_flag_pPb_cm_calculation()const{return flag_pPb_cm_calculation;}
 				double get_multiplicity_cut_more_than()const{return multip_cut_more_than;};
+				double get_sqrt_s()const{return sqrt_s;};
+				int get_seed()const{return seed;};
 				double get_multiplicity_cut_less_than()const{return multip_cut_less_than;};
 				double get_Ncoeff()const{return Ncoeff;}
 				int get_modeTL(){return this->modeTL;}
@@ -367,6 +373,8 @@ class Settings{
 					at_xTL(0.0),
 					at_yTL(0.0),
 					at_etaTL(0.0),
+					sqrt_s(0.0),
+					seed(0),
 					ID(-10000)
 					{};
 
@@ -410,6 +418,8 @@ class Settings{
 				else if(!strcmp(argv[i],"-valTL")){options.set_valTL(argv[i+1]);}
 				else if(!strcmp(argv[i],"-look_at_xTL")){options.set_at_xTL(atof(argv[i+1]));}
 				else if(!strcmp(argv[i],"-look_at_yTL")){options.set_at_yTL(atof(argv[i+1]));}
+				else if(!strcmp(argv[i],"-sqrt_s")){options.set_sqrt_s(atof(argv[i+1]));}
+				else if(!strcmp(argv[i],"-seed")){options.set_seed(atoi(argv[i+1]));}
 				else if(!strcmp(argv[i],"-look_at_etaTL")){options.set_at_etaTL(atof(argv[i+1]));}
 				else if(!strcmp(argv[i],"--high_pt_mode")){options.set_flag_high_pt_mode();}
 				else if(!strcmp(argv[i],"--pPb_cm")){options.set_flag_pPb_cm_calculation();}

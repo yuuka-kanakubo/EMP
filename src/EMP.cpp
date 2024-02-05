@@ -23,12 +23,11 @@ EMP::EMP(Settings::Options options_in, LogSettings log_in):options(options_in), 
 		if(!(i%this->PrintCounter)) ms->read(i);
 		std::vector<Container::ParticleInfo> part_1ev;
 		if(!readin->readEKRT(i, part_1ev)) {ms->readFail();};
-		readin->show_readin(part_1ev, false);
+		readin->show_readin(part_1ev, true);
 
 		//Propagating minijets.
 		//====================
-		if(options.get_minijet_freestream())
-			auto step = std::make_shared<MiniJetStep>(part_1ev);
+		auto step = std::make_shared<MiniJetStep>(part_1ev, options);
 		readin->show_readin(part_1ev, true);
 
 		//Converting energy and momentum into EMtensor

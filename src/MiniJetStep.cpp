@@ -1,8 +1,15 @@
 #include "MiniJetStep.h"
 
-MiniJetStep::MiniJetStep(std::vector<Container::ParticleInfo> &part_1ev){
-this->Step(part_1ev);
-this->PrintJets(part_1ev);
+MiniJetStep::MiniJetStep(std::vector<Container::ParticleInfo> &part_1ev, Settings::Options& options){
+	generator_unidist1.seed(options.get_seed());
+	generator_unidist2.seed(options.get_seed());
+	sqrt_s = options.get_sqrt_s();
+ 	  cout << "(:3 = )3 ? " << __FILE__ << " (" << __LINE__ << ") sqrt_s :" << sqrt_s << endl;
+	this->SetFormationTime(part_1ev);
+	if(options.get_minijet_freestream())
+		this->Step(part_1ev);
+	this->PrintJets(part_1ev);
+
 }
 
 MiniJetStep::~MiniJetStep(){
@@ -19,16 +26,64 @@ std::cout << ":) Minijet::Step is called." << std::endl;
 		double vz = part.pz/part.e;
 		part.x = part.x + constants::tau0*cosh(part.rap)*vx;
 		part.y = part.y + constants::tau0*cosh(part.rap)*vy;
-		part.z = 0.0 + constants::tau0*cosh(part.rap)*vz;
-		part.t = 0.0 + constants::tau0*cosh(part.rap);
-
-
-
-
+		part.z = part.z + constants::tau0*cosh(part.rap)*vz;
+		part.t = part.t + constants::tau0*cosh(part.rap);
 	}
 
 	return;
 }
+
+void MiniJetStep::SetFormationTime(std::vector<Container::ParticleInfo> &part_1ev){
+
+std::cout << ":) Minijet::SetFormationTime is called." << std::endl;  
+
+for(int i=0; i<(int)part_1ev.size(); i++){
+	if(fabs(i%2)<constants::SMALL){
+		Container::ParticleInfo &part3 = part_1ev[i];
+		Container::ParticleInfo &part4 = part_1ev[i+1];
+		double pt3 = part3.pt;//can be jet2
+		double pt4 = part4.pt;//can be jet2
+		double rap3 = part3.rap;
+		double rap4 = part4.rap;
+		double x1 = (pt3/sqrt_s)*(exp(rap3)+exp(rap4));
+		double x2 = (pt4/sqrt_s)*(exp(-rap3)+exp(-rap4));
+		part3.Bjx1 = x1;
+		part4.Bjx2 = x2;
+		part3.Bjx1 = x1;
+		part4.Bjx2 = x2;
+
+		double sqrttt = sqrt_s*x1*pt3*exp(-part3.rap);
+		double sqrtuu = sqrt_s*x1*pt3*exp(-part4.rap);
+		double sqrt_t = (sqrttt>0.)? sqrt(sqrttt)/constants::hbarc:  constants::TINY;
+		double sqrt_u = (sqrtuu>0.)? sqrt(sqrtuu)/constants::hbarc:  constants::TINY;
+
+		//min(sqrt u, sqrt t)^-1 
+		//==========
+		part3.deltaz = 1.0/min(sqrt_t, sqrt_u);
+		part4.deltaz = 1.0/min(sqrt_t, sqrt_u);
+
+		//Eskola, Wang
+		//==========
+		//part3.deltaz =2.0/((sqrt_s/constants::hbarc)*part1.Bjx1); 
+		//part4.deltaz =2.0/((sqrt_s/constants::hbarc)*part1.Bjx2); 
+
+		//Sample formation vertices
+		std::uniform_real_distribution<> uni_dist1(-part3.deltaz/2.0, part3.deltaz/2.0);
+		part3.z = uni_dist1(generator_unidist1);
+		std::uniform_real_distribution<> uni_dist2(-part4.deltaz/2.0, part4.deltaz/2.0);
+		part4.z = uni_dist2(generator_unidist2);
+
+		if(fabs(pt3-pt4)>constants::SMALL){
+			cout << "ERROR " << __FILE__ << " (" << __LINE__ << ") different pt3, pt4 :" << pt3 << "  pt4 " << pt4 << endl;
+			exit(EXIT_FAILURE);
+		}
+	}
+		if(i==(int)part_1ev.size()-2) break;
+}
+
+return;
+}
+
 
 
 

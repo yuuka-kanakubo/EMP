@@ -3,7 +3,7 @@
 DIR="/n/work02/yukanaku/mcaa-master/data/16Jan2024_test/60_70"
 EV="ev"
 EXT="EKRTminijet.txt"
-outputdir="test"
+outputdir="WithOutDeltaz"
 n=1
 seed=1234
 sqrt_s=5020
@@ -35,5 +35,5 @@ fi
  -n $n -outdir ${outputdir} -dir ${DIR} -f ${EV} -ext ${EXT}  \
  -seed $seed \
  -sqrt_s $sqrt_s \
- --fs 2 \
+ --fs 1 \
 > ${log_dname}${log_fname}.log  2>&1  &

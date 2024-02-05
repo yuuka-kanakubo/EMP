@@ -93,12 +93,12 @@ class Settings{
 				unsigned int collision_type;
 				double long_range_hist_pm;
 				double multip_cut_more_than;
-				double sqrt_s;
-				int seed;
 				double multip_cut_less_than;
                                 int modeTL;//0:xy, 1:xeta
                                 std::string valTL;
                                 double at_xTL, at_yTL, at_etaTL;
+				double sqrt_s_;
+				int seed__;
 				int ID;
 
 				void GetBinSettings(){
@@ -162,8 +162,8 @@ class Settings{
 					multip_cut_less_than=multip_cut_less_than_in;
 				};
 				void set_longrange_of_hist__plus_minus(const double dy){long_range_hist_pm=dy;};
-				void set_sqrt_s(const double val){sqrt_s=val;};
-				void set_seed(const int val){seed=val;};
+				void set_sqrt_s(const double val){sqrt_s_=val;};
+				void set_seed(const int val){seed__=val;};
 				void set_mid_rapidity_cut_type(const int cut_type){mid_rapidity_cut_type=cut_type;};
 				void set_flag_pPb_cm_calculation(){
 					flag_pPb_cm_calculation=true;
@@ -268,8 +268,8 @@ class Settings{
 				double get_pPb_mid_rapidity__fwd()const{return constants::pPb_mid_rapidity__fwd;}
 				bool get_flag_pPb_cm_calculation()const{return flag_pPb_cm_calculation;}
 				double get_multiplicity_cut_more_than()const{return multip_cut_more_than;};
-				double get_sqrt_s()const{return sqrt_s;};
-				int get_seed()const{return seed;};
+				double get_sqrt_s()const{return sqrt_s_;};
+				int get_seed()const{return seed__;};
 				double get_multiplicity_cut_less_than()const{return multip_cut_less_than;};
 				double get_Ncoeff()const{return Ncoeff;}
 				int get_modeTL(){return this->modeTL;}
@@ -373,8 +373,8 @@ class Settings{
 					at_xTL(0.0),
 					at_yTL(0.0),
 					at_etaTL(0.0),
-					sqrt_s(0.0),
-					seed(0),
+					sqrt_s_(0.0),
+					seed__(0),
 					ID(-10000)
 					{};
 

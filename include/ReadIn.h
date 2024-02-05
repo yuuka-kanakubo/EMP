@@ -11,6 +11,7 @@ class ReadIn{
 private:
 std::shared_ptr<Message> ms;
 Settings::Options options;
+std::string path;
 
 bool isGluon(const int pid){
  if(pid==constants::id_gluon){return true;}
@@ -50,33 +51,62 @@ public:
 ReadIn(shared_ptr<Message> ms_in, Settings::Options options_in);
 ~ReadIn(){};
 
+void setoutputpath(const std::string path){this->path=path;}
 bool read(const int i, std::vector<Container::ParticleInfo> &part_1ev);
 bool readEKRT(const int i, std::vector<Container::ParticleInfo> &part_1ev);
+
 bool show_readin(std::vector<Container::ParticleInfo> part_1ev, const bool ALL){
 
-std::cout << "Showing readin data " << std::endl;
-int count = 0;
-for(const auto& elem: part_1ev){
-count++;
-std::cout << elem.id << "  "
-	<< elem.e << "  "
-	<< elem.rap << "  "
-	<< elem.pt << "  "
-	<< elem.px << "  "
-	<< elem.py << "  "
-	<< elem.pz << "  "
-	<< elem.x << "  "
-	<< elem.y << "  "
-	<< elem.z << "  "
-	<< elem.t << "  "
-	<< elem.Bjx1 << "  "
-	<< elem.Bjx2 << "  "
-	<< elem.deltaz << "  "
-	<< std::endl;
-if(!ALL && count>10) break;
-}
-std::cout << "-->Showing readin data " << std::endl;
-return true;
+	ofstream ofs;
+	if(ALL){
+		ofs.open((path+"/"+constants::default_out_fnamejet).c_str());
+		if(!ofs) {
+			std::cout << ":( Could not open the output file." << std::endl;
+			exit(EXIT_FAILURE);
+		}
+	}
+	std::cout << "Showing readin data " << std::endl;
+	int count = 0;
+	for(const auto& elem: part_1ev){
+		count++;
+		std::cout << elem.id << "  "
+			<< elem.e << "  "
+			<< elem.rap << "  "
+			<< elem.pt << "  "
+			<< elem.px << "  "
+			<< elem.py << "  "
+			<< elem.pz << "  "
+			<< elem.x << "  "
+			<< elem.y << "  "
+			<< elem.z << "  "
+			<< elem.t << "  "
+			<< elem.Bjx1 << "  "
+			<< elem.Bjx2 << "  "
+			<< elem.deltaz << "  "
+			<< std::endl;
+
+		if(ALL){
+			ofs << elem.id << "  "
+				<< elem.e << "  "
+				<< elem.rap << "  "
+				<< elem.pt << "  "
+				<< elem.px << "  "
+				<< elem.py << "  "
+				<< elem.pz << "  "
+				<< elem.x << "  "
+				<< elem.y << "  "
+				<< elem.z << "  "
+				<< elem.t << "  "
+				<< elem.Bjx1 << "  "
+				<< elem.Bjx2 << "  "
+				<< elem.deltaz << "  "
+				<< std::endl;
+		}
+		if(!ALL && count>10) break;
+	}
+	std::cout << "-->Showing readin data " << std::endl;
+	if(ALL) ofs.close();
+	return true;
 };
 
 

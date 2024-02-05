@@ -469,6 +469,7 @@ inline	const double maxNchPP=60.0;
 
 inline	const string default_inputfname = "input";
 inline	const string default_out_fname="hist.txt";
+inline	const string default_out_fnamejet="jets.txt";
 inline  const string seed_outputfname="SEED.txt";
 inline	const int default_nfiles=10000;
 inline	const vector<string> save_settings_fname={"include/Constants.h"};

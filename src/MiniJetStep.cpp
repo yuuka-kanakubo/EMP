@@ -5,11 +5,12 @@ MiniJetStep::MiniJetStep(std::vector<Container::ParticleInfo> &part_1ev, Setting
 	generator_unidist2.seed(options.get_seed());
 	sqrt_s = options.get_sqrt_s();
  	  cout << "(:3 = )3 ? " << __FILE__ << " (" << __LINE__ << ") sqrt_s :" << sqrt_s << endl;
-	this->SetFormationTime(part_1ev);
 	if(options.get_minijet_freestream()==1)
 		this->Step(part_1ev);
-	else if(options.get_minijet_freestream()==2)
+	else if(options.get_minijet_freestream()==2){
+		this->SetFormationTime(part_1ev);
 		this->Step_wDeltaz(part_1ev);
+	}
 	this->PrintJets(part_1ev);
 
 }

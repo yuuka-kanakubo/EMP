@@ -6,8 +6,10 @@ MiniJetStep::MiniJetStep(std::vector<Container::ParticleInfo> &part_1ev, Setting
 	sqrt_s = options.get_sqrt_s();
  	  cout << "(:3 = )3 ? " << __FILE__ << " (" << __LINE__ << ") sqrt_s :" << sqrt_s << endl;
 	this->SetFormationTime(part_1ev);
-	if(options.get_minijet_freestream())
+	if(options.get_minijet_freestream()==1)
 		this->Step(part_1ev);
+	else if(options.get_minijet_freestream()==2)
+		this->Step_wDeltaz(part_1ev);
 	this->PrintJets(part_1ev);
 
 }
@@ -16,6 +18,25 @@ MiniJetStep::~MiniJetStep(){
 }
 
 
+void MiniJetStep::Step_wDeltaz(std::vector<Container::ParticleInfo> &part_1ev){
+
+std::cout << ":) Minijet::Step_wDeltaz is called." << std::endl;  
+
+	for(auto& part: part_1ev){
+		double vx = part.px/part.e;
+		double vy = part.py/part.e;
+		double vz = part.pz/part.e;
+		part.x = part.x + constants::tau0*cosh(part.rap)*vx;
+		part.y = part.y + constants::tau0*cosh(part.rap)*vy;
+		double sq = (1.0+pow(sinh(part.rap),2))*part.z*part.z + constants::tau0*constants::tau0;
+		part.t = (sq>0.)? part.z*cosh(part.rap)*sinh(part.rap)+cosh(part.rap)*sqrt(sq) :  constants::TINY;
+		//part.t = (sq>0.)? part.z*cosh(part.rap)*sinh(part.rap)+sqrt(sq) :  part.z*cosh(part.rap)*sinh(part.rap)+sqrt(constants::TINY);
+		part.z = part.z + vz * part.t;
+		//part.z = sqrt(part.t * part.t - constants::tau0*constants::tau0);
+	}
+
+	return;
+}
 void MiniJetStep::Step(std::vector<Container::ParticleInfo> &part_1ev){
 
 std::cout << ":) Minijet::Step is called." << std::endl;  
@@ -32,6 +53,7 @@ std::cout << ":) Minijet::Step is called." << std::endl;
 
 	return;
 }
+
 
 void MiniJetStep::SetFormationTime(std::vector<Container::ParticleInfo> &part_1ev){
 
@@ -72,6 +94,11 @@ for(int i=0; i<(int)part_1ev.size(); i++){
 		part3.z = uni_dist1(generator_unidist1);
 		std::uniform_real_distribution<> uni_dist2(-part4.deltaz/2.0, part4.deltaz/2.0);
 		part4.z = uni_dist2(generator_unidist2);
+
+		//Now tform is set to 0.
+		//======================
+		part3.t = 0.;
+		part4.t = 0.;
 
 		if(fabs(pt3-pt4)>constants::SMALL){
 			cout << "ERROR " << __FILE__ << " (" << __LINE__ << ") different pt3, pt4 :" << pt3 << "  pt4 " << pt4 << endl;

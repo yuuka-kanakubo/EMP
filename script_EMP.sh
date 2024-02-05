@@ -29,10 +29,11 @@ then
 fi
 #-------------------------
 
+##--fs: 1. tau0 propagation from origin.  2. propagation to tau0 with zform \neq 0.
 
 ./EMP \
  -n $n -outdir ${outputdir} -dir ${DIR} -f ${EV} -ext ${EXT}  \
  -seed $seed \
  -sqrt_s $sqrt_s \
+ --fs 2 \
 > ${log_dname}${log_fname}.log  2>&1  &
-## --fs \

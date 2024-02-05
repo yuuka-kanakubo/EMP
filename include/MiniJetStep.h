@@ -11,6 +11,7 @@ class MiniJetStep{
 
 private:
 void Step(std::vector<Container::ParticleInfo> &part_1ev);
+void Step_wDeltaz(std::vector<Container::ParticleInfo> &part_1ev);
 void PrintJets(std::vector<Container::ParticleInfo> &part_1ev);
 void SetFormationTime(std::vector<Container::ParticleInfo> &part_1ev);
 std::ranlux48 generator_unidist1;

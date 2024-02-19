@@ -38,15 +38,15 @@ void EigenSolve::Solve(){
 										this->ct->Hist2DMultiComp[i][j].yy,
 										this->ct->Hist2DMultiComp[i][j].yz,
 										this->ct->Hist2DMultiComp[i][j].zz
-										});
+										});//T^munu
 								const FourVector u = T.landau_frame_4velocity();
 								double e_COLLIDER = T.GetEigenVal();
 
 								//Get PL = T_mu nu l^nu l^mu
 								//=======================
 								double P_L = this->Tmunu_lmulnu(u, T);
-								double P_T = 0.50*(3.*this->Tmunu_Deltamunu(e_COLLIDER, T)-P_L); 
 								double P = -(1.0/3.)*this->Tmunu_Deltamunu(e_COLLIDER, T); 
+								double P_T = 0.50*(3.*P-P_L); 
 								double Pizz = PiMunu(9, u, T, e_COLLIDER);
 
 								EnergyMomentumTensor TL = T.boosted(u);
@@ -62,21 +62,24 @@ void EigenSolve::Solve(){
 									double P_LOCALRST = -(1.0/3.)*this->Tmunu_Deltamunu(e_LOCALRST, TL); 
 
 									//Here I am checking if u given by energymomentumtensor.cc 
-									//is actually covariant  vector, i.e. u_mu, or not.
-									//In double uTu, I am explicitly expressing th
+									//is actually covariant  vector, i.e. u_mu, or u^mu.
 									//===========================================================================================================
 									double uTu = T[0]*u[0]*u[0] 
 										+ 2.*T[1]*u[0]*u[1] + 2.*T[2]*u[0]*u[2] + 2.*T[3]*u[0]*u[3]
 										+ 2.*T[5]*u[1]*u[2] + 2.*T[6]*u[1]*u[3] + 2.*T[8]*u[2]*u[3] 
 										+ T[4]*u[1]*u[1] 
 										+ T[7]*u[2]*u[2] 
-										+ T[9]*u[3]*u[3];
+										+ T[9]*u[3]*u[3];//if u_mu
 
 									std::cout << "e_COLLIDER: " << e_COLLIDER << ",  umu : " << u << std::endl;
 									std::cout << "e_LOCALRST: " << e_LOCALRST << ",  umu : " << u__DUMMY << std::endl;
-									std::cout << "uTu       : " << uTu << std::endl;
+									std::cout << "uTu       : " << uTu << std::endl;//it is u_mu
 									std::cout << "P_COLLIDER    : " << P << std::endl;
 									std::cout << "P_LOCALRST    : " << P_LOCALRST << std::endl;
+									if(fabs(P-P_LOCALRST)>constants::SMALL){
+										std::cout << "Lorentz invariant valuable is not invariant under the rotation. Something is weired." << std::endl;
+										exit(EXIT_FAILURE);
+									}
 									std::cout << "P_L, P_T: " << P_L << ",  " << P_T << std::endl;
 									std::cout << std::endl;
 									COUNTER++;

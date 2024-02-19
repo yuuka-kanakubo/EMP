@@ -27,8 +27,10 @@ class EigenSolve{
   Settings::Options& options;
   void Solve();
   double Tmunu_lmulnu(FourVector u, EnergyMomentumTensor T){
-    double l0=1./(1-pow(u[3]/u[0], 2));//0th component of l^mu(contravariant vector) 
-    double l3=-1.*l0*u[3]/u[0];//0th component of l^mu (contravariant vector)
+
+    //u given here is u_mu, thus, v_z = (-u[3]/u[0])
+    double l3=1./(1-pow(-u[3]/u[0], 2));//l3 is the third component of l^mu = gamma_z (v_z, 0, 0, 1)
+    double l0=l3*(-u[3]/u[0]);//0th component of l^mu
     return T[0]*l0*l0 - 2.*T[3]*l0*l3 + T[9]*l3*l3; 
   }
   double Tmunu_Deltamunu(double e, EnergyMomentumTensor T){
@@ -38,7 +40,7 @@ class EigenSolve{
   double PiMunu(int comp, FourVector u, EnergyMomentumTensor T, double e){
 	  int mu=0;
 	  int nu=0;
-	  for(int i =0; i<5; i++){if(i!=0) u[i]*=-1.0;}
+	  for(int i =0; i<5; i++){if(i!=0) u[i]*=-1.0;}//u_mu is given, so I want to make it u^mu
 	  if (comp<4){
 		  nu=comp;
 	  }else if(comp<7){
@@ -51,7 +53,7 @@ class EigenSolve{
 		  mu=3; nu=3;
 	  }
 	  double gmunu=0.0;
-	  if(mu==nu) gmunu = (comp==0)? 1.0:-1.0;
+	  if(mu==nu) gmunu = 1.0;//g^munu = diag(+,+,+,+)
 	  return T[comp] - (e-this->Tmunu_Deltamunu(e, T)/3.0)*u[mu]*u[nu] - this->Tmunu_Deltamunu(e, T) * gmunu/3.0;
   }
 

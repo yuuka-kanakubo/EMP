@@ -10,7 +10,10 @@ MiniJetStep::MiniJetStep(std::vector<Container::ParticleInfo> &part_1ev, Setting
 	else if(options.get_minijet_freestream()==2){
 		this->SetFormationTime(part_1ev);
 		this->Step_wDeltaz(part_1ev);
-	}
+	}else{
+		cout << ":3 ? Error " << __FILE__ << " (" << __LINE__ << ") :options.get_minijet_freestream() " << options.get_minijet_freestream() << endl;
+		exit(EXIT_FAILURE);
+        }
 	this->PrintJets(part_1ev);
 
 }

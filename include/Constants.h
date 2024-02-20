@@ -60,7 +60,7 @@ inline const double TL_dtau2=0.3/hbarc;
 inline const std::string ext_nameTLxy="hydro_profiles_eta_at0__tau_";
 inline const std::string ext_nameTLxeta="hydro_profiles_y_at0__tau_";
 inline const double transSmear = 0.50;//fm
-inline const double longSmear = 0.005;
+inline const double longSmear = 0.06;
 inline const double tau0 = 0.2;//fm
 
 
@@ -356,7 +356,7 @@ inline const double tau0 = 0.2;//fm
 	const int eta_cell_capa=1169;
 	const string default_ext="/hadronised.txt";
 const double dl = 0.3;//fm
-const double dleta = 0.001;
+const double dleta = 0.02;
 
 #else
 	const std::string MODE = "default";

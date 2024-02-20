@@ -64,16 +64,11 @@ void EigenSolve::Solve(){
 									//Here I am checking if u given by energymomentumtensor.cc 
 									//is actually covariant  vector, i.e. u_mu, or u^mu.
 									//===========================================================================================================
-									double uTu = T[0]*u[0]*u[0] 
-										+ 2.*T[1]*u[0]*u[1] + 2.*T[2]*u[0]*u[2] + 2.*T[3]*u[0]*u[3]
-										+ 2.*T[5]*u[1]*u[2] + 2.*T[6]*u[1]*u[3] + 2.*T[8]*u[2]*u[3] 
-										+ T[4]*u[1]*u[1] 
-										+ T[7]*u[2]*u[2] 
-										+ T[9]*u[3]*u[3];//if u_mu
+									double uTu_ =uTu(T,u); 
 
 									std::cout << "e_COLLIDER: " << e_COLLIDER << ",  umu : " << u << std::endl;
 									std::cout << "e_LOCALRST: " << e_LOCALRST << ",  umu : " << u__DUMMY << std::endl;
-									std::cout << "uTu       : " << uTu << std::endl;//it is u_mu
+									std::cout << "uTu       : " << uTu_ << std::endl;//it is u_mu
 									std::cout << "P_COLLIDER    : " << P << std::endl;
 									std::cout << "P_LOCALRST    : " << P_LOCALRST << std::endl;
 									if(fabs(P-P_LOCALRST)>constants::SMALL){

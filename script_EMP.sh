@@ -3,7 +3,7 @@
 DIR="/n/work02/yukanaku/mcaa-master/data/16Jan2024_test/60_70"
 EV="ev"
 EXT="EKRTminijet.txt"
-outputdir="WithOutDeltaz"
+outputdir="SmallResWithOutDeltaz"
 n=1
 seed=1234
 sqrt_s=5020
@@ -30,6 +30,7 @@ fi
 #-------------------------
 
 ##--fs: 1. tau0 propagation from origin.  2. propagation to tau0 with zform \neq 0.
+##--TWODMAP_zx \
 
 ./EMP \
  -n $n -outdir ${outputdir} -dir ${DIR} -f ${EV} -ext ${EXT}  \

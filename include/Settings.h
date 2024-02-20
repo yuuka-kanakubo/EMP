@@ -404,7 +404,7 @@ class Settings{
 
 			for(int i=1; i<argc; i++) {
 				log.options.push_back(argv[i]);
-				if(!strcmp(argv[i],"-dir")){options.set_dir_name ( argv[i+1]);}///FOR OUTPUT DIR.NAME.
+				if(!strcmp(argv[i],"-dir")){options.set_dir_name ( argv[i+1]); i++;}///FOR OUTPUT DIR.NAME.
 				else if(!strcmp(argv[i],"-f")){options.set_f_name ( argv[i+1]);}
 				else if(!strcmp(argv[i],"-ext")){options.set_ext_name ( argv[i+1]);}
 				else if(!strcmp(argv[i],"-n")){options.set_nfile (atoi(argv[i+1]));}
@@ -466,7 +466,6 @@ class Settings{
 					cout << "ERROR:( There is no such an option: " << opt_in << endl; 
 					exit(1);
 				}
-				i++;
 			}
 		}
 

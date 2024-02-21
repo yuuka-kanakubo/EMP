@@ -2,7 +2,8 @@
 
 EigenSolve::EigenSolve(std::shared_ptr<Container>& ct_in, Settings::Options& options_in):ct(ct_in), options(options_in){
  
-  this->Solve();
+	eos = std::make_shared<EOS>(30, 3600);
+	this->Solve();
 
 };
 EigenSolve::~EigenSolve(){};
@@ -81,6 +82,7 @@ void EigenSolve::Solve(){
 								}
 
 								//std::cout << "Eigen vec u " << u << std::endl; 
+								//eos->s_en(val, 0.0)
 								//Archiving solutions (e, umu...) in Container.
 								//==========================================
 								this->ct->Hist2DMultiComp[i][j].ttLOCAL = TL[0];

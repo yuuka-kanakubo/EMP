@@ -1,8 +1,5 @@
 #ifndef EigenSolve_H
 #define EigenSolve_H
-
-#include "Container.h"
-#include "energymomentumtensor.h"
 #include <memory>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_sf_bessel.h>
@@ -13,6 +10,9 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_roots.h>
 #include <gsl/gsl_poly.h>
+#include "Container.h"
+#include "energymomentumtensor.h"
+#include "eostableclasses.h"
 
 class EigenSolve{
 
@@ -23,6 +23,7 @@ class EigenSolve{
 
 
   private:
+  std::shared_ptr<EOS> eos;
   std::shared_ptr<Container>& ct;
   Settings::Options& options;
   void Solve();

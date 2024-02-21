@@ -84,8 +84,6 @@ class EOS
 		eosmatrix x_H;
 		eosmatrix sd;
 		eosmatrix ed_s;
-
-                commentread cread;
 	
 		double *e;
 		double *b;

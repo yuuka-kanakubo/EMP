@@ -1,4 +1,6 @@
 // written by h. niemi
+#ifndef EOSTABLE_H 
+#define EOSTABLE_H 
 #include<gsl/gsl_sf.h>
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_multiroots.h>
@@ -324,3 +326,4 @@ ed_s(NX, NY)
 
 	fclose(buffer);
 }
+#endif

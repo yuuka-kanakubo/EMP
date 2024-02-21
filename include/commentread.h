@@ -1,4 +1,6 @@
 // written by h. niemi
+#ifndef COMMREAD_H
+#define COMMREAD_H
 #include <cstring>
 
 double commentfloatread(FILE *stream);
@@ -82,6 +84,7 @@ int commentstrread(FILE *stream, char *buf)
 
 	return 0;
 }
+#endif
 
 // Recognize empty line
 // {

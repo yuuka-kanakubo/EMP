@@ -2,6 +2,6 @@
 add_library(EMP_LIB STATIC
 	          ReadIn.cpp Write.cpp EMconv.cpp EMP.cpp EigenSolve.cpp
 		  energymomentumtensor.cpp fourvector.cpp threevector.cpp
-		  MiniJetStep.cpp
+		  MiniJetStep.cpp eostableclasses.cpp commentread.cpp
 	   )
 target_include_directories(EMP_LIB PUBLIC ${PROJECT_SOURCE_DIR}/include)

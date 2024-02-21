@@ -1,6 +1,6 @@
 // written by h. niemi
-//#ifndef EOSTABLE_H 
-//#define EOSTABLE_H 
+#ifndef EOSTABLE_H 
+#define EOSTABLE_H 
 #include<gsl/gsl_sf.h>
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_multiroots.h>
@@ -9,9 +9,10 @@
 #include <gsl/gsl_interp.h>
 #include "commentread.h"
 
-//class eosmatrix
-//{
+class eosmatrix
+{
 //	public:
+		eosmatrix(int NX, int NY);
 //		eosmatrix(int NX, int NY)
 //		{
 //			int i;
@@ -64,8 +65,8 @@
 //		double *value;
 //		int nx;
 //		int ny;
-//};
-//#endif
+};
+#endif
 //
 //
 //double eosmatrix::interpolate_linear(double *xtable, double xvalue, int npoints_x, double *ytable, double yvalue, int npoints_y)

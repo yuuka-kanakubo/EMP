@@ -48,7 +48,6 @@ void EigenSolve::Solve(){
 								double P_L = this->Tmunu_lmulnu(u, T);
 								double P = -(1.0/3.)*this->Tmunu_Deltamunu(e_COLLIDER, T); 
 								double P_T = 0.50*(3.*P-P_L); 
-								double Pizz = PiMunu(9, u, T, e_COLLIDER);
 
 								EnergyMomentumTensor TL = T.boosted(u);
 
@@ -57,7 +56,12 @@ void EigenSolve::Solve(){
 								//===============
 								const FourVector u__DUMMY = TL.landau_frame_4velocity();
 								double e_LOCALRST = TL.GetEigenVal();
+								double PixxLOCAL = PiMunu(4, u__DUMMY, TL, e_LOCALRST);
+								double PiyyLOCAL = PiMunu(7, u__DUMMY, TL, e_LOCALRST);
 								double PizzLOCAL = PiMunu(9, u__DUMMY, TL, e_LOCALRST);
+								double Pixx = PiMunu(4, u, T, e_COLLIDER);
+								double Piyy = PiMunu(7, u, T, e_COLLIDER);
+								double Pizz = PiMunu(9, u, T, e_COLLIDER);
 								if(COUNTER < 5 && this->ct->Hist2DMultiComp[i][j].tt>constants::DECENT){
 
 									double P_LOCALRST = -(1.0/3.)*this->Tmunu_Deltamunu(e_LOCALRST, TL); 
@@ -67,8 +71,8 @@ void EigenSolve::Solve(){
 									//===========================================================================================================
 									double uTu_ =uTu(T,u); 
 
-									std::cout << "e_COLLIDER: " << e_COLLIDER << ",  umu : " << u << std::endl;
-									std::cout << "e_LOCALRST: " << e_LOCALRST << ",  umu : " << u__DUMMY << std::endl;
+									std::cout << "e_COLLIDER: " << e_COLLIDER << ",  umu : " << u        << ",  Tmunu : " << T  << std::endl;
+									std::cout << "e_LOCALRST: " << e_LOCALRST << ",  umu : " << u__DUMMY << ",  Tmunu : " << TL << std::endl;
 									std::cout << "uTu       : " << uTu_ << std::endl;//it is u_mu
 									std::cout << "P_COLLIDER    : " << P << std::endl;
 									std::cout << "P_LOCALRST    : " << P_LOCALRST << std::endl;
@@ -82,7 +86,6 @@ void EigenSolve::Solve(){
 								}
 
 								//std::cout << "Eigen vec u " << u << std::endl; 
-								//eos->s_en(val, 0.0)
 								//Archiving solutions (e, umu...) in Container.
 								//==========================================
 								this->ct->Hist2DMultiComp[i][j].ttLOCAL = TL[0];
@@ -95,8 +98,13 @@ void EigenSolve::Solve(){
 								this->ct->Hist2DMultiComp[i][j].zzLOCAL=TL[9];
 								this->ct->Hist2DMultiComp[i][j].P_T = P_T;
 								this->ct->Hist2DMultiComp[i][j].P_L = P_L;
+								this->ct->Hist2DMultiComp[i][j].pixxLOCAL = PixxLOCAL;
+								this->ct->Hist2DMultiComp[i][j].piyyLOCAL = PiyyLOCAL;
 								this->ct->Hist2DMultiComp[i][j].pizzLOCAL = PizzLOCAL;
+								this->ct->Hist2DMultiComp[i][j].pixx = Pixx;
+								this->ct->Hist2DMultiComp[i][j].piyy = Piyy;
 								this->ct->Hist2DMultiComp[i][j].pizz = Pizz;
+								this->ct->Hist2DMultiComp[i][j].Peq = eos->p_en(e_COLLIDER, 0.0);
 
 							}
 				}

@@ -79,6 +79,8 @@ for(int i=0; i<constants::x_cell_capa; ++i){
 			<< setw(16) << ct->Hist2DMultiComp[i][j].yy << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].yz << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].zz << "    " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].pixx << "    " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].piyy << "    " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].pizz << "    " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].ttLOCAL << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].xxLOCAL << "  " 
@@ -87,8 +89,11 @@ for(int i=0; i<constants::x_cell_capa; ++i){
 			<< setw(16) << ct->Hist2DMultiComp[i][j].xyLOCAL << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].e << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].P << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].Peq << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].P_L << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].P_T << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].pixxLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].piyyLOCAL << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].pizzLOCAL << "  " 
 			<< endl;
 	}
@@ -132,6 +137,8 @@ for(int i=0; i<constants::eta_cell_capa; ++i){
 			<< setw(16) << ct->Hist2DMultiComp[i][j].yy << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].yz << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].zz << "    " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].pixx << "    " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].piyy << "    " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].pizz << "    " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].ttLOCAL << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].xxLOCAL << "  " 
@@ -140,8 +147,11 @@ for(int i=0; i<constants::eta_cell_capa; ++i){
 			<< setw(16) << ct->Hist2DMultiComp[i][j].xyLOCAL << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].e << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].P << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].Peq << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].P_L << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].P_T << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].pixxLOCAL << "  " 
+			<< setw(16) << ct->Hist2DMultiComp[i][j].piyyLOCAL << "  " 
 			<< setw(16) << ct->Hist2DMultiComp[i][j].pizzLOCAL << "  " 
 			<< endl;
 	}

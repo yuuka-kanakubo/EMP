@@ -111,16 +111,21 @@ class Container{
 			 double yy; 
 			 double yz; 
 			 double zz; 
+			 double pixx; 
+			 double piyy; 
 			 double pizz; 
 			 double ttLOCAL; 
 			 double xxLOCAL; 
 			 double yyLOCAL; 
 			 double zzLOCAL; 
 			 double xyLOCAL; 
+			 double pixxLOCAL; 
+			 double piyyLOCAL; 
 			 double pizzLOCAL; 
 			 double P_L; 
 			 double P_T; 
 			 double P; 
+			 double Peq; 
 			 double e; 
 
 
@@ -137,16 +142,21 @@ class Container{
 			 yy=0.0; 
 			 yz=0.0; 
 			 zz=0.0; 
+			 pixx=0.0; 
+			 piyy=0.0; 
 			 pizz=0.0; 
 			 ttLOCAL=0.0; 
 			 xxLOCAL=0.0; 
 			 yyLOCAL=0.0; 
 			 zzLOCAL=0.0; 
 			 xyLOCAL=0.0; 
+			 pixxLOCAL=0.0; 
+			 piyyLOCAL=0.0; 
 			 pizzLOCAL=0.0; 
 			 P_L=0.0; 
 			 P_T=0.0; 
 			 P=0.0; 
+			 Peq=0.0; 
 			 e=0.0; 
 
 

@@ -98,6 +98,7 @@ bool ReadIn::readEKRT(const int i, std::vector<Container::ParticleInfo> &part_1e
 				part_in.is_mom1Neutron=is_mom1Neutron;
 				part_in.is_mom2Neutron=is_mom2Neutron;
 
+
 				double mtsq=pow(part_in.pt,2)+pow(part_in.m,2);
 				double mt=(mtsq>0.0) ? sqrt(mtsq):0.0;
 				part_in.mt=mt;

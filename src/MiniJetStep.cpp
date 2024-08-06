@@ -82,11 +82,20 @@ for(int i=0; i<(int)part_1ev.size(); i++){
 		double sqrtuu = sqrt_s*x1*pt3*exp(-part4.rap);
 		double sqrt_t = (sqrttt>0.)? sqrt(sqrttt)/constants::hbarc:  constants::TINY;
 		double sqrt_u = (sqrtuu>0.)? sqrt(sqrtuu)/constants::hbarc:  constants::TINY;
+		double p31_L2 = pow(-(part3.pt/2.)*(exp(-part3.rap)+exp(part4.rap)), 2);
+		double p41_L2 = pow(-(part3.pt/2.)*(exp(part3.rap)+exp(-part4.rap)), 2);
+		if(p31_L2==0.0) p31_L2 = constants::TINY;
+		if(p41_L2==0.0) p41_L2 = constants::TINY;
+
+		//p31_L^-1 p41_L^-1 
+		//==========
+		part3.deltaz = 1.0/sqrt(p31_L2);
+		part4.deltaz = 1.0/sqrt(p31_L2);
 
 		//min(sqrt u, sqrt t)^-1 
 		//==========
-		part3.deltaz = 1.0/min(sqrt_t, sqrt_u);
-		part4.deltaz = 1.0/min(sqrt_t, sqrt_u);
+		//part3.deltaz = 1.0/min(sqrt_t, sqrt_u);
+		//part4.deltaz = 1.0/min(sqrt_t, sqrt_u);
 
 		//Eskola, Wang
 		//==========

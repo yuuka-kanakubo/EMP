@@ -3,7 +3,7 @@
 DIR="/n/work02/yukanaku/mcaa-master/data/16Jan2024_test/60_70"
 EV="ev"
 EXT="EKRTminijet.txt"
-outputdir="SmallResWithDeltaz_tau0_0.75"
+outputdir="test"
 n=1
 seed=1234
 sqrt_s=5020

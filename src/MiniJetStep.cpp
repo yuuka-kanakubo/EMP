@@ -6,7 +6,7 @@ MiniJetStep::MiniJetStep(std::vector<Container::ParticleInfo> &part_1ev, Setting
 	sqrt_s = options.get_sqrt_s();
  	  cout << "(:3 = )3 ? " << __FILE__ << " (" << __LINE__ << ") sqrt_s :" << sqrt_s << endl;
 	if(options.get_minijet_freestream()==1)
-		this->Step(part_1ev);
+		this->Step(part_1ev);//Already in JYU hydro.
 	else if(options.get_minijet_freestream()==2){
 		this->SetFormationTime(part_1ev);
 		this->Step_wDeltaz(part_1ev);
@@ -89,8 +89,8 @@ for(int i=0; i<(int)part_1ev.size(); i++){
 
 		//p31_L^-1 p41_L^-1 
 		//==========
-		part3.deltaz = 1.0/sqrt(p31_L2);
-		part4.deltaz = 1.0/sqrt(p31_L2);
+		part3.deltaz = constants::hbarc/sqrt(p31_L2);
+		part4.deltaz = constants::hbarc/sqrt(p31_L2);
 
 		//min(sqrt u, sqrt t)^-1 
 		//==========
